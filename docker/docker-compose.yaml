@@ -12,7 +12,8 @@ services:
       # 宿主机：容器
       - ${EXPORT_PORT_DB}:3306
     volumes:
-      - ./db_init_sql:/docker-entrypoint-initdb.d
+      - ./mysql_data:/var/lib/mysql
+      - ./init_sql:/docker-entrypoint-initdb.d
 
   #MySql Web UI
   php-my-admin:

@@ -1,4 +1,4 @@
-# Front End Ignore File
+# Front End Ignore Files
 GUI/node_modules
 GUI/dist
 
@@ -9,3 +9,6 @@ Rest Service/.classpath
 Rest Service/.project
 Rest Service/.settings
 Rest Service/HELP.md
+
+# Docker Ignore Files
+Docker/mysql_data
