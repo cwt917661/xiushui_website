@@ -11,4 +11,5 @@ Rest Service/.settings
 Rest Service/HELP.md
 
 # Docker Ignore Files
-Docker/mysql_data
+docker/mysql_data
+docker/.env
