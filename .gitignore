@@ -12,6 +12,6 @@ Rest Service/HELP.md
 
 # Docker Ignore Files
 Docker/mysql_data
-# Docker/.env
 Docker/service/xiushui_website-0.0.1-SNAPSHOT.war
-
+Docker/.env
+Docker/init_sql/create_user.sql
