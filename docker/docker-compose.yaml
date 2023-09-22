@@ -31,7 +31,7 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./service/Dockerfile
     ports:
       - ${EXPORT_PORT_SERVICE}:8080
     environment: # Pass environment variables to the service
