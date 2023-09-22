@@ -14,7 +14,4 @@ Rest Service/HELP.md
 Docker/mysql_data
 Docker/.env
 Docker/service/xiushui_website-0.0.1-SNAPSHOT.war
-docker/.env
-docker/init_sql/create_user.sql
-docker/.env
-docker/init_sql/create_user.sql
+
