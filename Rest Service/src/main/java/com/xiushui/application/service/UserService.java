@@ -8,5 +8,5 @@ public interface UserService
 {
 	List<User> getAllUsers();
 	
-	User getUserByName();
+	List<User> getUserByInfo(String name);
 }

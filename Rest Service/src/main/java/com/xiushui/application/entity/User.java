@@ -33,10 +33,10 @@ public class User
 	private String address;
 
 	@Column(nullable = false)
-	private Timestamp create_dt;
+	private Timestamp createDt;
 
 	@Column(nullable = false)
-	private Timestamp update_dt;
+	private Timestamp updateDt;
 
 	public String getAccount()
 	{
@@ -127,24 +127,24 @@ public class User
 		this.address = address;
 	}
 
-	public Timestamp getCreate_dt()
+	public Timestamp getCreateDt()
 	{
-		return create_dt;
+		return createDt;
 	}
 
-	public void setCreate_dt(Timestamp create_dt)
+	public void setCreateDt(Timestamp createDt)
 	{
-		this.create_dt = create_dt;
+		this.createDt = createDt;
 	}
 
-	public Timestamp getUpdate_dt()
+	public Timestamp getUpdateDt()
 	{
-		return update_dt;
+		return updateDt;
 	}
 
-	public void setUpdate_dt(Timestamp update_dt)
+	public void setUpdateDt(Timestamp updateDt)
 	{
-		this.update_dt = update_dt;
+		this.updateDt = updateDt;
 	}
 
 }

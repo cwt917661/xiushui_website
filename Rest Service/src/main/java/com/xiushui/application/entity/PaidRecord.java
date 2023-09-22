@@ -12,7 +12,7 @@ public class PaidRecord
 	private int id;
 	
 	@Column(nullable = false)
-	private int user_donate_id;
+	private int userDonateId;
 	
 	@Column(nullable = false)
 	private int paid;
@@ -21,16 +21,16 @@ public class PaidRecord
 	private int sponsor;
 	
 	@Column(nullable = false)
-	private Timestamp create_dt;
+	private Timestamp createDt;
 
-	public int getUser_donate_id()
+	public int getUserDonateId()
 	{
-		return user_donate_id;
+		return userDonateId;
 	}
 
-	public void setUser_donate_id(int user_donate_id)
+	public void setUserDonateId(int userDonateId)
 	{
-		this.user_donate_id = user_donate_id;
+		this.userDonateId = userDonateId;
 	}
 
 	public int getPaid()
@@ -53,13 +53,13 @@ public class PaidRecord
 		this.sponsor = sponsor;
 	}
 
-	public Timestamp getCreate_dt()
+	public Timestamp getCreateDt()
 	{
-		return create_dt;
+		return createDt;
 	}
 
-	public void setCreate_dt(Timestamp create_dt)
+	public void setCreateDt(Timestamp createDt)
 	{
-		this.create_dt = create_dt;
+		this.createDt = createDt;
 	}
 }

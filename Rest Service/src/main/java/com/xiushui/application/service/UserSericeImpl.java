@@ -21,10 +21,9 @@ public class UserSericeImpl implements UserService
 	}
 
 	@Override
-	public User getUserByName()
+	public List<User> getUserByInfo(String name)
 	{
-//		userRepository.
-		return null;
+		return userRepository.findByName(name);
 	}
 
 }

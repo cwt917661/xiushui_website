@@ -15,25 +15,25 @@ public class UserDonate
 	private String active = "Y";
 	
 	@Column(nullable = false)
-	private int user_id;
+	private int userId;
 	
 	@Column(nullable = false)
-	private int category_id;
+	private int categoryId;
 	
 	@Column(nullable = false)
 	private String year;
 	
 	@Column(nullable = false)
-	private String payment_type;
+	private String paymentType;
 	
 	@Column(nullable = false)
-	private int total_amount;
+	private int totalAmount;
 	
 	@Column(nullable = false)
-	private int current_paid;
+	private int currentPaid;
 	
 	@Column(nullable = false)
-	private Timestamp due_dt;
+	private Timestamp dueDt;
 	
 	@Column(nullable = false)
 	private int sponsor;
@@ -41,10 +41,10 @@ public class UserDonate
 	private String remark;
 	
 	@Column(nullable = false)
-	private Timestamp create_dt;
+	private Timestamp createDt;
 	
 	@Column(nullable = false)
-	private Timestamp update_dt;
+	private Timestamp updateDt;
 
 	public boolean isActive()
 	{
@@ -58,24 +58,24 @@ public class UserDonate
 		else this.active = "N";
 	}
 
-	public int getUser_id()
+	public int getUserId()
 	{
-		return user_id;
+		return userId;
 	}
 
-	public void setUser_id(int user_id)
+	public void setUserId(int userId)
 	{
-		this.user_id = user_id;
+		this.userId = userId;
 	}
 
-	public int getCategory_id()
+	public int getCategoryId()
 	{
-		return category_id;
+		return categoryId;
 	}
 
-	public void setCategory_id(int category_id)
+	public void setCategoryId(int categoryId)
 	{
-		this.category_id = category_id;
+		this.categoryId = categoryId;
 	}
 
 	public String getYear()
@@ -88,44 +88,44 @@ public class UserDonate
 		this.year = year;
 	}
 
-	public String getPayment_type()
+	public String getPaymentType()
 	{
-		return payment_type;
+		return paymentType;
 	}
 
-	public void setPayment_type(String payment_type)
+	public void setPaymentType(String paymentType)
 	{
-		this.payment_type = payment_type;
+		this.paymentType = paymentType;
 	}
 
-	public int getTotal_amount()
+	public int getTotalAmount()
 	{
-		return total_amount;
+		return totalAmount;
 	}
 
-	public void setTotal_amount(int total_amount)
+	public void setTotalAmount(int totalAmount)
 	{
-		this.total_amount = total_amount;
+		this.totalAmount = totalAmount;
 	}
 
-	public int getCurrent_paid()
+	public int getCurrentPaid()
 	{
-		return current_paid;
+		return currentPaid;
 	}
 
-	public void setCurrent_paid(int current_paid)
+	public void setCurrentPaid(int currentPaid)
 	{
-		this.current_paid = current_paid;
+		this.currentPaid = currentPaid;
 	}
 
-	public Timestamp getDue_dt()
+	public Timestamp getDueDt()
 	{
-		return due_dt;
+		return dueDt;
 	}
 
-	public void setDue_dt(Timestamp due_dt)
+	public void setDueDt(Timestamp dueDt)
 	{
-		this.due_dt = due_dt;
+		this.dueDt = dueDt;
 	}
 
 	public int getSponsor()
@@ -148,24 +148,24 @@ public class UserDonate
 		this.remark = remark;
 	}
 
-	public Timestamp getCreate_dt()
+	public Timestamp getCreateDt()
 	{
-		return create_dt;
+		return createDt;
 	}
 
-	public void setCreate_dt(Timestamp create_dt)
+	public void setCreateDt(Timestamp createDt)
 	{
-		this.create_dt = create_dt;
+		this.createDt = createDt;
 	}
 
-	public Timestamp getUpdate_dt()
+	public Timestamp getUpdateDt()
 	{
-		return update_dt;
+		return updateDt;
 	}
 
-	public void setUpdate_dt(Timestamp update_dt)
+	public void setUpdateDt(Timestamp updateDt)
 	{
-		this.update_dt = update_dt;
+		this.updateDt = updateDt;
 	}
 
 }
