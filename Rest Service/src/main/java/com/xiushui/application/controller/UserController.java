@@ -16,7 +16,7 @@ import com.xiushui.application.request.RqstGetUserByInfo;
 import com.xiushui.application.service.UserService;
 
 @RestController
-@RequestMapping(value="/User", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/UserService", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController
 {
 	@Autowired

@@ -14,7 +14,7 @@ import com.xiushui.application.entity.UserDonate;
 import com.xiushui.application.service.UserDonateService;
 
 @RestController
-@RequestMapping(value="/UserDonate", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/UserDonateService", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserDonateController
 {
 	@Autowired

@@ -4,7 +4,10 @@
     color="brown lighten-1"
     dark
   >
-    <v-toolbar-title>點燈紀錄</v-toolbar-title>
+    <v-toolbar-title>
+      <v-icon>mdi-lightbulb-on-outline</v-icon>
+      點燈紀錄
+    </v-toolbar-title>
 
     <v-spacer></v-spacer>
 

@@ -1,6 +1,7 @@
 # Front End Ignore Files
 GUI/node_modules
 GUI/dist
+GUI/package-lock.json
 
 # Java Ignore Files
 Rest Service/target/

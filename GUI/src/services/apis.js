@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // User相關的 api
-const request = axios.create({
-  baseURL: 'http://localhost:8080/RestService/api/',
+const userRequest = axios.create({
+  baseURL: '/UserService/',
   headers: { 'Content-Type': 'application/json'},
 });
 // // 文章相關的 api
@@ -15,7 +15,7 @@ const request = axios.create({
 // });
 
 // User 相關的 api
-export const apiUserList = () => request.get('getAllUser');
+export const apiUserList = () => userRequest.get('getAllUsers');
 // export const apiUserList = () => request.get('userController.php');
 // export const apiUserLogin = data => request.post('/signIn', data);
 // export const apiUserLogout = data => request.post('/signOut', data);

@@ -56,7 +56,7 @@
           </v-icon>
           未繳
         </v-list-item-icon>
-        <v-list-item-content>
+        <v-list-item-content style="color:red;">
           <v-list-item-title>{{paymentData.payment}}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
