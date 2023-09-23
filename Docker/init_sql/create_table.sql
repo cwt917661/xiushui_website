@@ -1,4 +1,4 @@
-CREATE TABLE `donate_category` (
+CREATE TABLE IF NOT EXISTS `donate_category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `create_dt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -6,10 +6,10 @@ CREATE TABLE `donate_category` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `account` varchar(255) DEFAULT NULL,
   `passwd` varchar(255) DEFAULT NULL,
@@ -26,10 +26,10 @@ CREATE TABLE `user` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `account_UNIQUE` (`account`),
   UNIQUE KEY `UC_Person` (`name`,`birthday`,`address`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE `user_donate` (
+CREATE TABLE IF NOT EXISTS `user_donate` (
   `id` int NOT NULL AUTO_INCREMENT,
   `active` varchar(5) NOT NULL DEFAULT 'Y',
   `user_id` int NOT NULL,
@@ -48,10 +48,10 @@ CREATE TABLE `user_donate` (
   UNIQUE KEY `UC_donateinfo` (`user_id`,`category_id`,`year`),
   FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
   FOREIGN KEY (`category_id`) REFERENCES `donate_category`(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE `paid_record` (
+CREATE TABLE IF NOT EXISTS `paid_record` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_donate_id` int NOT NULL,
   `paid` int NOT NULL,

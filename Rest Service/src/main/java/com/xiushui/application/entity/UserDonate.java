@@ -1,10 +1,15 @@
 package com.xiushui.application.entity;
 
 import java.sql.*;
+import java.util.Objects;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user_denote")
+@Table(name = "user_donate")
 public class UserDonate
 {
 	@Id
@@ -14,8 +19,9 @@ public class UserDonate
 	@Column(nullable = false)
 	private String active = "Y";
 	
-	@Column(nullable = false)
-	private int userId;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User userInfo;
 	
 	@Column(nullable = false)
 	private int categoryId;
@@ -40,11 +46,29 @@ public class UserDonate
 	
 	private String remark;
 	
-	@Column(nullable = false)
+	@CreationTimestamp
 	private Timestamp createDt;
 	
-	@Column(nullable = false)
+	@UpdateTimestamp
 	private Timestamp updateDt;
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(categoryId, userInfo, year);
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		UserDonate other = (UserDonate) obj;
+		return categoryId == other.categoryId
+				&& userInfo.getId() == other.userInfo.getId()
+				&& Objects.equals(year, other.year);
+	}
 
 	public boolean isActive()
 	{
@@ -58,14 +82,14 @@ public class UserDonate
 		else this.active = "N";
 	}
 
-	public int getUserId()
+	public User getUserInfo()
 	{
-		return userId;
+		return userInfo;
 	}
 
-	public void setUserId(int userId)
+	public void setUserId(User userInfo)
 	{
-		this.userId = userId;
+		this.userInfo = userInfo;
 	}
 
 	public int getCategoryId()

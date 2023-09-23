@@ -1,6 +1,11 @@
 package com.xiushui.application.entity;
 
 import java.sql.*;
+import java.util.Objects;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -32,11 +37,34 @@ public class User
 
 	private String address;
 
-	@Column(nullable = false)
+	@CreationTimestamp
 	private Timestamp createDt;
 
-	@Column(nullable = false)
+	@UpdateTimestamp
 	private Timestamp updateDt;
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(address, birthday, name);
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		User other = (User) obj;
+		return Objects.equals(address, other.address)
+				&& Objects.equals(birthday, other.birthday)
+				&& Objects.equals(name, other.name);
+	}
+
+	public int getId()
+	{
+		return id;
+	}
 
 	public String getAccount()
 	{

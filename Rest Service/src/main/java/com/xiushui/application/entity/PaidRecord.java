@@ -1,6 +1,9 @@
 package com.xiushui.application.entity;
 
 import java.sql.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -20,7 +23,7 @@ public class PaidRecord
 	@Column(nullable = false)
 	private int sponsor;
 	
-	@Column(nullable = false)
+	@CreationTimestamp
 	private Timestamp createDt;
 
 	public int getUserDonateId()
