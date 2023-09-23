@@ -9,6 +9,7 @@ Rest Service/.classpath
 Rest Service/.project
 Rest Service/.settings
 Rest Service/HELP.md
+Rest Service/src/main/resources/application-dev.properties
 
 # Docker Ignore Files
 Docker/mysql_data
