@@ -53,13 +53,13 @@ export default {
   },
 
   methods: {
-    initialize() {
+    async initialize() {
       this.tableHeight = window.innerHeight * 0.4;
       // console.log('show user data');
       apiUserList()
       .then(response => {
-        // console.log(response);
-        this.tableData = response.data.body;
+        // console.log(JSON.stringify(response.data[0]));
+        this.tableData = response.data;
       })
       .catch(error => {
         // console.error('get user list error: ');

@@ -1,6 +1,7 @@
 package com.xiushui.application.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,5 +35,12 @@ public class UserController
 	{
         List<User> users = userService.getUserByInfo(userInfo.getName());
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+	
+	@PostMapping("getUsersById")
+	public ResponseEntity<Optional<User>> getUsersById(@RequestBody RqstGetUserByInfo userInfo)
+	{
+        Optional<User> user = userService.getUserById(userInfo.getId());
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

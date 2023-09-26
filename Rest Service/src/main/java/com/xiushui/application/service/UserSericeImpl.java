@@ -1,6 +1,7 @@
 package com.xiushui.application.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,12 @@ public class UserSericeImpl implements UserService
 	public List<User> getUserByInfo(String name)
 	{
 		return userRepository.findByName(name);
+	}
+
+	@Override
+	public Optional<User> getUserById(long id)
+	{
+		return userRepository.findById(id);
 	}
 
 }

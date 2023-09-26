@@ -13,12 +13,12 @@ export default {
       {
         text: '類別',
         align: 'start',
-        value: 'type',
+        value: 'categoryId',
       },
       { text: '年度', value: 'year' },
-      { text: '祈福人', value: 'username' },
-      { text: '身分', value: 'usertype' },
-      { text: '到期日', value: 'duedate' },
+      { text: '祈福人', value: 'userInfo.name' },
+      { text: '身分', value: 'userInfo.type' },
+      { text: '到期日', value: 'dueDt' },
       { text: '未繳金額', value: 'payment'},
       { text: '', value: 'actions', sortable: false },
     ],
@@ -38,14 +38,16 @@ export default {
       carbs: 0,
       protein: 0,
     },
-    tableHeight: 0
+    tableHeight: 0,
   }),
   created() {
     this.tableHeight = window.innerHeight * 0.4;
   },
   methods: {
     setData(data) {
-      this.tableData = data;
+      this.tableData = data.map((obj) => Object.assign({}, obj, {
+        payment : obj.totalAmount - obj.currentPaid        
+      }));
     },
     getColor (payment) {
       if (payment > 0) return 'red'

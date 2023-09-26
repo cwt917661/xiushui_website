@@ -3,6 +3,7 @@ package com.xiushui.application.request;
 public class RqstGetUserByInfo
 {
 	String name;
+	Long id;
 
 	public String getName()
 	{
@@ -12,5 +13,15 @@ public class RqstGetUserByInfo
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
 	}
 }

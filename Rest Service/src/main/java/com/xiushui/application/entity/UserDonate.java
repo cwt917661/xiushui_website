@@ -6,6 +6,8 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -38,8 +40,9 @@ public class UserDonate
 	@Column(nullable = false)
 	private int currentPaid;
 	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(nullable = false)
-	private Timestamp dueDt;
+	private Date dueDt;
 	
 	@Column(nullable = false)
 	private int sponsor;
@@ -66,7 +69,7 @@ public class UserDonate
 		if (getClass() != obj.getClass()) return false;
 		UserDonate other = (UserDonate) obj;
 		return categoryId == other.categoryId
-				&& userInfo.getId() == other.userInfo.getId()
+				&& userInfo == other.userInfo
 				&& Objects.equals(year, other.year);
 	}
 
@@ -142,12 +145,12 @@ public class UserDonate
 		this.currentPaid = currentPaid;
 	}
 
-	public Timestamp getDueDt()
+	public Date getDueDt()
 	{
 		return dueDt;
 	}
 
-	public void setDueDt(Timestamp dueDt)
+	public void setDueDt(Date dueDt)
 	{
 		this.dueDt = dueDt;
 	}

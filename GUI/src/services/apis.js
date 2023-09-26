@@ -1,31 +1,25 @@
 import axios from 'axios';
 
-// User相關的 api
-const userRequest = axios.create({
-  baseURL: '/UserService/',
-  headers: { 'Content-Type': 'application/json'},
+const baseURL = ''
+const httpHeader = { 'Content-Type': 'application/json',
+                     'Accept' : 'application/json',
+                   }
+const httpRequest = axios.create({
+  baseURL: baseURL,
+  headers: httpHeader
 });
-// // 文章相關的 api
-// const articleRequest = axios.create({
-//   baseURL: 'https://api/article/'
-// });
-// // 搜尋相關的 api
-// const searchRequest = axios.create({
-//   baseURL: 'https://api/search/'
-// });
+
+// 攔截 API response 的回傳
+httpRequest.interceptors.response.use(response  => {
+  // 這邊可以對回來的資料先進行驗證處理，再來決定要不要把資料給吐出去
+  return Promise.resolve(response);
+}, error => {
+  // 這邊當API發生錯誤的時候就可以處理 Error handling
+  return Promise.reject(error.response.data);
+})
 
 // User 相關的 api
-export const apiUserList = () => userRequest.get('getAllUsers');
-// export const apiUserList = () => request.get('userController.php');
-// export const apiUserLogin = data => request.post('/signIn', data);
-// export const apiUserLogout = data => request.post('/signOut', data);
-// export const apiUserSignUp = data => request.post('/signUp', data);
+export const apiUserList = () => httpRequest.get('UserService/getAllUsers');
 
-// 文章相關的 api
-// export const apiArticleItem = () => articleRequest.get('/ArticleItem');
-// export const apiArticleMsg = data => articleRequest.post('/ArticleMsg', data);
-// export const apiArticleLink = data => articleRequest.post('/ArticleLink', data);
-//
-// // 搜尋相關的 api
-// export const apiSearch = data => searchRequest.get(`/Search?searchdata=${data}`);
-// export const apiSearchType = () => searchRequest.get(`/SearchType`);
+
+export const apiUserDonateList = () => httpRequest.get('UserDonateService/getAllInformation');

@@ -3,6 +3,7 @@ package com.xiushui.application.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.xiushui.application.entity.UserDonate;
@@ -17,7 +18,7 @@ public class UserDonateSericeImpl implements UserDonateService
 	@Override
 	public List<UserDonate> getAllInformation()
 	{
-		return userDonateRepository.findAll();
+		return userDonateRepository.findAll(Sort.by(Sort.Direction.ASC, "dueDt"));
 	}
 
 	
