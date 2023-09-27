@@ -20,6 +20,4 @@ public class UserDonateSericeImpl implements UserDonateService
 	{
 		return userDonateRepository.findAll(Sort.by(Sort.Direction.ASC, "dueDt"));
 	}
-
-	
 }

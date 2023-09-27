@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-const baseURL = ''
-const httpHeader = { 'Content-Type': 'application/json',
-                     'Accept' : 'application/json',
-                   }
+const baseURL = '';
 const httpRequest = axios.create({
   baseURL: baseURL,
-  headers: httpHeader
+  headers: { 'Content-Type': 'application/json',
+             'Accept' : 'application/json'
+            }
 });
 
 // 攔截 API response 的回傳
@@ -19,7 +18,7 @@ httpRequest.interceptors.response.use(response  => {
 })
 
 // User 相關的 api
-export const apiUserList = () => httpRequest.get('UserService/getAllUsers');
+export const apiUserList = () => httpRequest.get('UserService/GetAllUsers');
 
 
-export const apiUserDonateList = () => httpRequest.get('UserDonateService/getAllInformation');
+export const apiUserDonateList = () => httpRequest.get('UserDonateService/GetAllInformation');

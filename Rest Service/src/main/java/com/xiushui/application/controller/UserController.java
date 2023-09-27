@@ -23,21 +23,21 @@ public class UserController
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("getAllUsers")
+	@GetMapping("GetAllUsers")
     public ResponseEntity<List<User>> getAllUsers()
 	{
         List<User> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 	
-	@PostMapping("getUsersByInfo")
+	@PostMapping("GetUsersByInfo")
     public ResponseEntity<List<User>> getUsersByInfo(@RequestBody RqstGetUserByInfo userInfo)
 	{
         List<User> users = userService.getUserByInfo(userInfo.getName());
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 	
-	@PostMapping("getUsersById")
+	@PostMapping("GetUsersById")
 	public ResponseEntity<Optional<User>> getUsersById(@RequestBody RqstGetUserByInfo userInfo)
 	{
         Optional<User> user = userService.getUserById(userInfo.getId());

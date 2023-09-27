@@ -1,15 +1,29 @@
 package com.xiushui.application.entity;
 
-import java.sql.*;
-import java.util.Objects;
+import java.sql.Timestamp;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "donate_category")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(setterPrefix = "set", toBuilder = true)
+@EqualsAndHashCode(of = {"name"})
 public class DonateCategory
 {
 	@Id
@@ -24,50 +38,4 @@ public class DonateCategory
 
 	@UpdateTimestamp
 	private Timestamp updateDt;
-
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(name);
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj) return true;
-		if (obj == null) return false;
-		if (getClass() != obj.getClass()) return false;
-		DonateCategory other = (DonateCategory) obj;
-		return Objects.equals(name, other.name);
-	}
-
-	public String getName()
-	{
-		return name;
-	}
-
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-
-	public Timestamp getCreateDt()
-	{
-		return createDt;
-	}
-
-	public void setCreateDt(Timestamp createDt)
-	{
-		this.createDt = createDt;
-	}
-
-	public Timestamp getUpdateDt()
-	{
-		return updateDt;
-	}
-
-	public void setUpdateDt(Timestamp updateDt)
-	{
-		this.updateDt = updateDt;
-	}
 }

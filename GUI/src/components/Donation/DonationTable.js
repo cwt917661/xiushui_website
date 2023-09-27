@@ -13,11 +13,11 @@ export default {
       {
         text: '類別',
         align: 'start',
-        value: 'categoryId',
+        value: 'category',
       },
       { text: '年度', value: 'year' },
-      { text: '祈福人', value: 'userInfo.name' },
-      { text: '身分', value: 'userInfo.type' },
+      { text: '祈福人', value: 'userName' },
+      { text: '身分', value: 'userType' },
       { text: '到期日', value: 'dueDt' },
       { text: '未繳金額', value: 'payment'},
       { text: '', value: 'actions', sortable: false },
@@ -57,11 +57,11 @@ export default {
       // console.log(item);
       // console.log('open contact info');
       var contactData = {
-        name: item.username,
-        type: item.usertype,
-        phone: item.phone,
-        email: item.email,
-        address: item.address
+        name: item.userName,
+        type: item.userType,
+        phone: item.userPhone,
+        email: item.userEmail,
+        address: item.userAddress
       };
       this.dialogView = true;
       this.$nextTick(() => {

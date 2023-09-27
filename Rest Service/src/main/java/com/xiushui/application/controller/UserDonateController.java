@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xiushui.application.entity.UserDonate;
+import com.xiushui.application.response.RespGetAllUserDonateInfo;
+import com.xiushui.application.response.ResponseMapper;
 import com.xiushui.application.service.UserDonateService;
 
 @RestController
@@ -20,11 +22,13 @@ public class UserDonateController
 	@Autowired
 	private UserDonateService userDonateService;
 	
-	@GetMapping("getAllInformation")
-    public ResponseEntity<List<UserDonate>> getAllInformation()
+	@GetMapping("GetAllInformation")
+    public ResponseEntity<List<RespGetAllUserDonateInfo>> getAllInformation()
 	{
         List<UserDonate> info = userDonateService.getAllInformation();
-        return new ResponseEntity<>(info, HttpStatus.OK);
+        return new ResponseEntity<>(
+        		ResponseMapper.INSTANCE.convertList(info),
+        		HttpStatus.OK);
     }
 	
 }
