@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const baseURL = '';
 const httpRequest = axios.create({
-  baseURL: baseURL,
+  baseURL: import.meta.env.VITE_REST_BASE_URL,
   headers: { 'Content-Type': 'application/json',
              'Accept' : 'application/json'
             }
@@ -19,8 +18,12 @@ httpRequest.interceptors.response.use(response  => {
   return Promise.reject(error.response.data);
 })
 
-// User 相關的 api
-export const apiUserList = () => httpRequest.get('UserService/GetAllUsers');
+// Get service
+export const apiGetDataService = (url) => httpRequest.get(url);
 
+// Post service
+export const apiPostDataService = (url, data) => httpRequest.post(url, data);
+// export const apiQueryUserDonateData = (url) => httpRequest.get(url);
 
-export const apiUserDonateList = () => httpRequest.get('UserDonateService/GetAllInformation');
+// export const apiUserDonateList = () => httpRequest.get('UserDonateService/GetAllInformation');
+// export const apiUserDonateOverDraft = () => httpRequest.get('UserDonateService/GetOverDraft');

@@ -8,4 +8,9 @@ public interface UserDonateService
 {
 	List<UserDonate> getAllInformation();
 	
+	List<UserDonate> getOverDraft();
+	
+	List<UserDonate> getOnComing();
+	
+	List<UserDonate> getByUserId(long id);
 }

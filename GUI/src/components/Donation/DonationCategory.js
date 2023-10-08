@@ -8,9 +8,6 @@ export default {
       {color: 'yellow accent-4', icon: 'mdi-calendar-alert', text: '即將到期'}
     ],
   }),
-  created() {
-
-  },
   methods: {
 
     changeType(index) {
@@ -31,6 +28,9 @@ export default {
     async overDraft() {
       // console.log('未繳費清單');
       var table = this.$parent.$children[1];
+      // var alert = this.$alert;
+      // console.log(this.$root.alert);
+      this.$root.alert.showError("test");
 
       apiUserDonateList()
       .then(response => {
@@ -38,118 +38,11 @@ export default {
         // this.tableData = response.data;
       })
       .catch(error => {
-        // console.error('get user list error: ');
+        // alert.showError(error);
+        this.$root.alert.showError("error");
         console.error('get user list error: ' + error);
       });
-      // var tableData = [
-      //   {
-      //     type: '元神燈',
-      //     year: 109,
-      //     username: 'QQQ',
-      //     usertype: '二十屆',
-      //     payment: 4300,
-      //   },
-      //   {
-      //     type: '光明燈',
-      //     year: 110,
-      //     username: 'TAT',
-      //     usertype: '二十三屆',
-      //     payment: 6000,
-      //   },
-      //   {
-      //     type: '元神燈',
-      //     year: 110,
-      //     username: 'TAT',
-      //     usertype: '二十三屆',
-      //     payment: 1000,
-      //   },
-      //   {
-      //     type: '光明燈',
-      //     year: 109,
-      //     username: 'ABC',
-      //     usertype: '信眾',
-      //     payment: 4.9,
-      //   },
-      //   {
-      //     type: '元神燈',
-      //     year: 108,
-      //     username: 'ABC',
-      //     usertype: '信眾',
-      //     payment: 7,
-      //   },
-      //   {
-      //     type: '元神燈',
-      //     year: 109,
-      //     username: 'QQQ',
-      //     usertype: '二十屆',
-      //     payment: 4300,
-      //   },
-      //   {
-      //     type: '光明燈',
-      //     year: 110,
-      //     username: 'TAT',
-      //     usertype: '二十三屆',
-      //     payment: 6000,
-      //   },
-      //   {
-      //     type: '元神燈',
-      //     year: 110,
-      //     username: 'TAT',
-      //     usertype: '二十三屆',
-      //     payment: 1000,
-      //   },
-      //   {
-      //     type: '光明燈',
-      //     year: 109,
-      //     username: 'ABC',
-      //     usertype: '信眾',
-      //     payment: 4.9,
-      //   },
-      //   {
-      //     type: '元神燈',
-      //     year: 108,
-      //     username: 'ABC',
-      //     usertype: '信眾',
-      //     payment: 7,
-      //   },
-      //   {
-      //     type: '元神燈',
-      //     year: 109,
-      //     username: 'QQQ',
-      //     usertype: '二十屆',
-      //     payment: 4300,
-      //   },
-      //   {
-      //     type: '光明燈',
-      //     year: 110,
-      //     username: 'TAT',
-      //     usertype: '二十三屆',
-      //     payment: 6000,
-      //   },
-      //   {
-      //     type: '元神燈',
-      //     year: 110,
-      //     username: 'TAT',
-      //     usertype: '二十三屆',
-      //     payment: 1000,
-      //   },
-      //   {
-      //     type: '光明燈',
-      //     year: 109,
-      //     username: 'ABC',
-      //     usertype: '信眾',
-      //     payment: 4.9,
-      //   },
-      //   {
-      //     type: '元神燈',
-      //     year: 108,
-      //     username: 'ABC',
-      //     usertype: '信眾',
-      //     payment: 7,
-      //   },
-      // ]
-
-      // table.setData(tableData);
+      
     },
 
     overDue() {

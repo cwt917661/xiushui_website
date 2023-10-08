@@ -1,5 +1,5 @@
 <template>
-  <v-alert :color="type" :icon="icon" v-if="type">
+  <v-alert :color="type" :icon="icon" v-if="type" transition="slide-y-transition">
     {{alertMsg}}
   </v-alert>
 </template>
@@ -17,7 +17,7 @@ export default {
   methods: {
     showSuccess(msg) {
       this.icon = 'mdi-alert-circle-outline';
-      this.type = 'info';
+      this.type = 'success';
       this.alertMsg = msg;
       this.showAlert();
     },

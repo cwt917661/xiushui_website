@@ -6,6 +6,7 @@
      dark
    >
     <img :src="imgLogo" width="50px" height="50px"/>
+    <div style="width=1px;"></div>
     <strong class="subheading">唯心聖教  秀水太極道場</strong>
   </v-app-bar>
 

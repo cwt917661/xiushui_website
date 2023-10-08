@@ -18,6 +18,24 @@ public class UserDonateSericeImpl implements UserDonateService
 	@Override
 	public List<UserDonate> getAllInformation()
 	{
-		return userDonateRepository.findAll(Sort.by(Sort.Direction.ASC, "dueDt"));
+		return userDonateRepository.findAll(Sort.by(Sort.Direction.DESC, "dueDt"));
+	}
+
+	@Override
+	public List<UserDonate> getOverDraft()
+	{
+		return userDonateRepository.findOverDraft();
+	}
+
+	@Override
+	public List<UserDonate> getOnComing()
+	{
+		return userDonateRepository.findOnComing();
+	}
+
+	@Override
+	public List<UserDonate> getByUserId(long id)
+	{
+		return userDonateRepository.findByUserId(id);
 	}
 }

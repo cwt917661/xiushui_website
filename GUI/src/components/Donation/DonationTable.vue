@@ -24,7 +24,7 @@
               </v-icon>
               <span class="title font-weight-light">聯絡資訊</span>
             </v-card-title>
-          <user-contact-info ref="contactInfo"></user-contact-info>
+          <!-- <user-contact-info ref="contactInfo"></user-contact-info> -->
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn text color="primary"
@@ -45,7 +45,7 @@
               </v-icon>
               <span class="title font-weight-light">繳費</span>
             </v-card-title>
-          <user-payment-info ref="paymentInfo"></user-payment-info>
+          <!-- <user-payment-info ref="paymentInfo"></user-payment-info> -->
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn text color="primary"
