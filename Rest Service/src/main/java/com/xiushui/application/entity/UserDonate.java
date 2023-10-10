@@ -34,7 +34,7 @@ public class UserDonate
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	
 	@Column(nullable = false)
 	@Builder.Default

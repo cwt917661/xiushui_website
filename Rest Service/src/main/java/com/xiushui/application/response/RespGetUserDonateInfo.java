@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder(setterPrefix = "set", toBuilder = true)
-public class RespGetAllUserDonateInfo
+public class RespGetUserDonateInfo
 {
 	private int id;
 	

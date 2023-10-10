@@ -3,8 +3,8 @@ package com.xiushui.application.request;
 import lombok.Data;
 
 @Data
-public class RqstGetUserByInfo
+public class RqstModifyDonateCategory
 {
 	String name;
-	Long id;
+	long id;
 }

@@ -1,4 +1,4 @@
-package com.xiushui.application.response;
+package com.xiushui.application.mapper;
 
 import java.util.List;
 
@@ -8,11 +8,12 @@ import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 import com.xiushui.application.entity.UserDonate;
+import com.xiushui.application.response.RespGetUserDonateInfo;
 
 @Mapper
-public interface ResponseMapper
+public interface UserDonateResponseMapper
 {
-	ResponseMapper INSTANCE = Mappers.getMapper(ResponseMapper.class);
+	UserDonateResponseMapper INSTANCE = Mappers.getMapper(UserDonateResponseMapper.class);
 	
 	@Mappings({
         @Mapping(target = "userId", source = "userDonate.userInfo.id"),
@@ -23,7 +24,7 @@ public interface ResponseMapper
         @Mapping(target = "userAddress", source = "userDonate.userInfo.address"),
         @Mapping(target = "category", source = "userDonate.category.name")
     })
-	RespGetAllUserDonateInfo convert(UserDonate userDonate);
+	RespGetUserDonateInfo convert(UserDonate userDonate);
 	
-	List<RespGetAllUserDonateInfo> convertList(List<UserDonate> userDonate);
+	List<RespGetUserDonateInfo> convertList(List<UserDonate> userDonate);
 }

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.xiushui.application.entity.User;
 import com.xiushui.application.request.RqstGetUserByInfo;
+import com.xiushui.application.response.RespRestResponse;
 import com.xiushui.application.service.UserService;
 
 @RestController
@@ -24,23 +26,53 @@ public class UserController
 	private UserService userService;
 	
 	@GetMapping("GetAllUsers")
-    public ResponseEntity<List<User>> getAllUsers()
+    public ResponseEntity<RespRestResponse<Object>> getAllUsers()
 	{
-        List<User> users = userService.getAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+		try {
+	        List<User> users = userService.getAllUsers();			
+			RespRestResponse<Object> response
+							= new RespRestResponse<Object>();
+			response.setRespData(users);
+			response.setErrMsg("Get all users successfully.");
+	        return new ResponseEntity<>(response, HttpStatus.OK);			
+		} catch(Exception e) {
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setErrMsg(e.getMessage());
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
 	
-	@PostMapping("GetUsersByInfo")
-    public ResponseEntity<List<User>> getUsersByInfo(@RequestBody RqstGetUserByInfo userInfo)
+	@PostMapping("GetUsersByName")
+    public ResponseEntity<RespRestResponse<Object>> getUsersByInfo(@RequestBody RqstGetUserByInfo userInfo)
 	{
-        List<User> users = userService.getUserByInfo(userInfo.getName());
-        return new ResponseEntity<>(users, HttpStatus.OK);
+		try {
+	        List<User> users = userService.getUserByInfo(userInfo.getName());
+			RespRestResponse<Object> response
+							= new RespRestResponse<Object>();
+			response.setRespData(users);
+			response.setErrMsg("Get users by user name successfully.");
+	        return new ResponseEntity<>(response, HttpStatus.OK);			
+		} catch(Exception e) {
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setErrMsg(e.getMessage());
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
 	
 	@PostMapping("GetUsersById")
-	public ResponseEntity<Optional<User>> getUsersById(@RequestBody RqstGetUserByInfo userInfo)
+	public ResponseEntity<RespRestResponse<Object>> getUsersById(@RequestBody RqstGetUserByInfo userInfo)
 	{
-        Optional<User> user = userService.getUserById(userInfo.getId());
-        return new ResponseEntity<>(user, HttpStatus.OK);
+		try {
+	        Optional<User> user = userService.getUserById(userInfo.getId());
+			RespRestResponse<Object> response
+							= new RespRestResponse<Object>();
+			response.setRespData(user);
+			response.setErrMsg("Get users by id successfully.");
+	        return new ResponseEntity<>(response, HttpStatus.OK);			
+		} catch(Exception e) {
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setErrMsg(e.getMessage());
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
 }

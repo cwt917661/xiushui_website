@@ -1,6 +1,7 @@
 package com.xiushui.application.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xiushui.application.entity.UserDonate;
+import com.xiushui.application.mapper.DonateCategoryResponseMapper;
+import com.xiushui.application.mapper.UserDonateResponseMapper;
 import com.xiushui.application.request.RqstGetUserByInfo;
-import com.xiushui.application.response.RespGetAllUserDonateInfo;
-import com.xiushui.application.response.ResponseMapper;
+import com.xiushui.application.response.RespRestResponse;
 import com.xiushui.application.service.UserDonateService;
 
 @RestController
@@ -25,38 +27,66 @@ public class UserDonateController
 	private UserDonateService userDonateService;
 	
 	@GetMapping("GetAllInformation")
-    public ResponseEntity<List<RespGetAllUserDonateInfo>> getAllInformation()
+    public ResponseEntity<RespRestResponse<Object>> getAllInformation()
 	{
-        List<UserDonate> info = userDonateService.getAllInformation();
-        return new ResponseEntity<>(
-        		ResponseMapper.INSTANCE.convertList(info),
-        		HttpStatus.OK);
+		try {
+	        List<UserDonate> info = userDonateService.getAllInformation();
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setRespData(UserDonateResponseMapper.INSTANCE.convertList(info));
+			response.setErrMsg("Get donate information successfully.");
+	        return new ResponseEntity<>(response, HttpStatus.OK);			
+		} catch(Exception e) {
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setErrMsg(e.getMessage());
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
 	
 	@GetMapping("GetOverDraft")
-    public ResponseEntity<List<RespGetAllUserDonateInfo>> getOverDraft()
+    public ResponseEntity<RespRestResponse<Object>> getOverDraft()
 	{
-        List<UserDonate> info = userDonateService.getOverDraft();
-        return new ResponseEntity<>(
-        		ResponseMapper.INSTANCE.convertList(info),
-        		HttpStatus.OK);
+		try {
+	        List<UserDonate> info = userDonateService.getOverDraft();
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setRespData(UserDonateResponseMapper.INSTANCE.convertList(info));
+			response.setErrMsg("Get over draft donate information successfully.");
+	        return new ResponseEntity<>(response, HttpStatus.OK);			
+		} catch(Exception e) {
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setErrMsg(e.getMessage());
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
 	
 	@GetMapping("GetOnComing")
-    public ResponseEntity<List<RespGetAllUserDonateInfo>> getOComing()
+    public ResponseEntity<RespRestResponse<Object>> getOComing()
 	{
-        List<UserDonate> info = userDonateService.getOnComing();
-        return new ResponseEntity<>(
-        		ResponseMapper.INSTANCE.convertList(info),
-        		HttpStatus.OK);
+		try {
+	        List<UserDonate> info = userDonateService.getOnComing();
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setRespData(UserDonateResponseMapper.INSTANCE.convertList(info));
+			response.setErrMsg("Get on coming donate information successfully.");
+	        return new ResponseEntity<>(response, HttpStatus.OK);			
+		} catch(Exception e) {
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setErrMsg(e.getMessage());
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
 	
 	@PostMapping("GetByUserId")
-	public ResponseEntity<List<RespGetAllUserDonateInfo>> GetByUserId(@RequestBody RqstGetUserByInfo userInfo)
+	public ResponseEntity<RespRestResponse<Object>> getByUserId(@RequestBody RqstGetUserByInfo userInfo)
 	{
-		List<UserDonate> info = userDonateService.getByUserId(userInfo.getId());
-        return new ResponseEntity<>(
-        		ResponseMapper.INSTANCE.convertList(info),
-        		HttpStatus.OK);
+		try {
+			List<UserDonate> info = userDonateService.getByUserId(userInfo.getId());
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setRespData(UserDonateResponseMapper.INSTANCE.convertList(info));
+			response.setErrMsg("Get donate information by user id successfully.");
+	        return new ResponseEntity<>(response, HttpStatus.OK);			
+		} catch(Exception e) {
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setErrMsg(e.getMessage());
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
 }

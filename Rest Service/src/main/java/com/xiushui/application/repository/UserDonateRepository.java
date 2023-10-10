@@ -24,4 +24,8 @@ public interface UserDonateRepository extends JpaRepository<UserDonate, Long>
 	@Query(value = "SELECT * FROM user_donate WHERE user_id = :id"
 			+ " ORDER BY year desc", nativeQuery = true)
 	List<UserDonate> findByUserId(long id);
+	
+	@Query(value = "SELECT * FROM user_donate WHERE category_id = :id"
+			+ " ORDER BY year desc", nativeQuery = true)
+	List<UserDonate> findByCategoryId(long id);
 }
