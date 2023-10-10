@@ -1,25 +1,64 @@
 <!-- 個人點燈紀錄 -->
 <template>
-    <v-data-table
-      v-model:items-per-page="reactVals.itemsPerPage"
-      fixed-header
-      :headers="constVals.headers"
-      :items="reactVals.tableData"
-      item-key="id"
-      class="elevation-1"
-      :height="constVals.tableHeight"
-      v-model:expanded="reactVals.expanded"
-      expand-on-click
-      @click:row="handleClick"
+  <v-data-table 
+    fixed-header 
+    :headers="constVals.headers"
+    :items="reactVals.tableData" 
+    item-key="id" 
+    class="elevation-1" 
+    :height="constVals.tableHeight"
+    v-model:expanded="reactVals.expanded"
     >
-      <template v-slot:expanded-row="{ columns, item }">
-        <tr>
-          <td :colspan="columns.length">
-            <SingleUserDonationTable ref="singleUserDonation" />
-          </td>
-        </tr>
-      </template>
-    </v-data-table>
-  </template>
-  <script src="./OverallUserTable.js"></script>
+    <template v-slot:expanded-row="{ columns }">
+      <tr>
+        <td :colspan="columns.length">
+          <SingleUserDonationTable :data="reactVals.userDonationData" />
+        </td>
+      </tr>
+    </template>
+
+    <template v-slot:item.actions="{ item, index }">
+      <v-tooltip location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-icon 
+            color="cyan-darken-1" 
+            v-bind="props" 
+            size="large" 
+            @click="addNewDonation(item)"
+          >
+            mdi-note-plus
+          </v-icon>
+        </template>
+        <span>新增</span>
+      </v-tooltip>
+      <v-tooltip location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-icon 
+            class="mx-3"
+            color="red-darken-3" 
+            v-bind="props"
+            size="large" 
+            @click="editDonation(item)">
+            mdi-clipboard-edit
+          </v-icon>
+        </template>
+        <span>修改</span>
+      </v-tooltip>
+      <v-tooltip location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-icon 
+            v-bind="props"
+            size="large" 
+            @click="onExpand(item, index)">
+            mdi-arrow-down-drop-circle-outline
+          </v-icon>
+        </template>
+        <span>展開</span>
+      </v-tooltip>
+      
+    </template>
+    
+  </v-data-table>
+</template>
+<script src="./OverallUserTable.js"></script>
   

@@ -2,6 +2,9 @@
 GUI/node_modules
 GUI/dist
 GUI/package-lock.json
+GUI_Vue3/node_modules
+GUI_Vue3/dist
+GUI_Vue3/package-lock.json
 
 # Java Ignore Files
 Rest Service/target/
@@ -17,3 +20,4 @@ Docker/mysql_data
 Docker/service/*.war
 Docker/.env
 Docker/init_sql/create_user.sql
+GUI_Vue3/package-lock.json

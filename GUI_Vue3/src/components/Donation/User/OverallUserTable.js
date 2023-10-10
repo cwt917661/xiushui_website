@@ -1,7 +1,9 @@
-import { apiGetDataService, apiPostDataService } from '@/services/api.js';
 import { VDataTable } from 'vuetify/labs/VDataTable';
-import { ref, reactive } from 'vue';
+import { reactive } from 'vue';
 import SingleUserDonationTable from './SingleUserDonationTable.vue';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/stores/UserStore';
+import { useUserDonateStore } from '@/stores/UserDonateStore';
 
 const constVals = reactive({
   tableHeight: window.innerHeight * 0.5,
@@ -14,58 +16,54 @@ const constVals = reactive({
     { title: '身分', key: 'type' },
     { title: '生日', key: 'birthday' },
     { title: '電話', key: 'phone' },
-    { title: '地址', key: 'address' }
+    { title: '地址', key: 'address' },
+    { title: '', key: 'actions', sortable: false },
   ]
 });
 
 const reactVals = reactive({
-  itemsPerPage: 5,
   tableData: [],
   expanded: [],
   editedIndex: -1,
-  editedItem: {}
+  editedItem: {},
+  userDonationData: []
 });
 
-const singleUserDonation = ref();
-const handleClick = async (item) => {
-  if (reactVals.expanded.length > 1) reactVals.expanded.splice(0, 1);
-  let userData = reactVals.tableData[reactVals.expanded[0] - 1];
-  await waitForElementToExist(singleUserDonation).then(element => {
-    if (reactVals.expanded.length == 1) {
-      var sendData = { id: userData.id };
-      var url = import.meta.env.VITE_REST_URL_USERDONATE_GET_BY_USERID;
+const onExpand = (item, index) => {
+  // if already expanded , close it
+  if(reactVals.expanded.some(e => e == (index+1))) reactVals.expanded.shift();
+  else{
+    // expand one at one time
+    reactVals.expanded.shift();
+    reactVals.expanded.push(index+1);
+  }
 
-      apiPostDataService(url, sendData)
-        .then(response => {
-          singleUserDonation.value.setData(response.data);
-        })
-        .catch(error => {
-          console.error('get donation data by user id: ' + error);
-        });
-      
-    }
-  });
-};
+  // start expand
+  if(reactVals.expanded.length == 1) {
+    var sendData = { id: item.id };
 
-function waitForElementToExist(selector) {
-  return new Promise(resolve => {
-    if (selector) {
-      return resolve(selector);
-    }
-
-    const observer = new MutationObserver(() => {
-      if (selector) {
-        resolve(selector);
-        observer.disconnect();
+    const { donations, success, error } = storeToRefs(useUserDonateStore());
+    const { fetchByUserId } = useUserDonateStore();
+    fetchByUserId(sendData).then(() => {
+      if (success.value) {
+        reactVals.userDonationData = donations.value.map((obj) => Object.assign({}, obj, {
+          payment: obj.totalAmount - obj.currentPaid
+        }));
+      } else {
+        // error handling
+        console.error('Get donation data by user id: ' + error);
       }
     });
+  }
+};
 
-    observer.observe(document.body, {
-      subtree: true,
-      childList: true,
-    });
-  });
-}
+const addNewDonation = (item) => {
+  console.log('add new donation for' + item.name);
+};
+
+const editDonation = (item) => {
+  console.log('edit donation for' + item.name);
+};
 
 export default {
   components: {
@@ -74,16 +72,19 @@ export default {
   },
   setup() {
     // initiallize table data
-    var url = import.meta.env.VITE_REST_URL_USER_GET_ALLINFO;
-    apiGetDataService(url)
-      .then(response => {
-        reactVals.tableData = response.data;
-      })
-      .catch(error => {
-        console.error('get user list error: ' + error);
-      });
 
-    return { constVals, reactVals, singleUserDonation, handleClick };
+    const { users, success, error } = storeToRefs(useUserStore());
+    const { fetchAll } = useUserStore();
+    fetchAll().then(() => {
+      if (success.value) {
+        reactVals.tableData = users;
+      } else {
+        // error handling
+        console.error('Get user list error: ' + error);
+      }
+    });
+
+    return { constVals, reactVals, onExpand, addNewDonation, editDonation };
   },
 
 }

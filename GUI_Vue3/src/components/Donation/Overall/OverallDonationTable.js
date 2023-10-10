@@ -1,7 +1,7 @@
 import {ref, reactive} from 'vue';
 import { VDataTable } from 'vuetify/labs/VDataTable';
-import UserContactInfo from '@/components/Donation/Dialogs/UserContactInfo.vue';
-import UserPaymentInfo from '@/components/Donation/Dialogs/UserPaymentInfo.vue';
+import UserContactDialog from '@/components/Donation/Dialogs/UserContactDialog.vue';
+import UserPaymentDialog from '@/components/Donation/Dialogs/UserPaymentDialog.vue';
 
 const constVals = reactive({
   tableHeight: window.innerHeight * 0.4,
@@ -21,7 +21,6 @@ const constVals = reactive({
 });
 
 const reactVals = reactive({
-  itemsPerPage: 5,
   tableData: [],
   editedIndex: -1,
   editedItem: {}
@@ -66,8 +65,8 @@ const payment = (item) => {
 export default {
   components: {
     VDataTable,
-    UserContactInfo,
-    UserPaymentInfo,
+    UserContactDialog,
+    UserPaymentDialog,
   },
   setup() {
     return{

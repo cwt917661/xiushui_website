@@ -2,6 +2,7 @@ import { onMounted, ref } from 'vue';
 import OverallDonationTable from '@/components/Donation/Overall/OverallDonationTable.vue'
 import OverallCategory from '@/components/Donation/Overall/OverallCategory.vue';
 import OverallUserTable from '@/components/Donation/User/OverallUserTable.vue';
+import AddCategoryDialog from '@/components/Donation/Dialogs/AddCategoryDialog.vue';
 
 const tabHeader = [
   { icon: 'mdi-alert-outline', text: '待處理' },
@@ -9,11 +10,13 @@ const tabHeader = [
   { icon: 'mdi-text-box-search-outline', text: '點燈記錄查詢' }
 ];
 
+const menus = [ '新增種類', '新增祈福人', '新增紀錄'];
+
 const tab = ref(0);
 
 const overallCategory = ref();
 const switchTag = (index) => {
-  console.log(tabHeader[index].text);
+  // console.log(tabHeader[index].text);
   // 待處理
   if (index == 0) {
     overallCategory.value.changeType(0);
@@ -32,11 +35,32 @@ const openDialog = () => {
   donationEditDialog.open(isEdit);
 };
 
+const menuSelected = (index) => {
+  // 新增種類
+  if(index === 0) addCategory();
+  else if(index === 1) addUser();
+  else addRecord();
+};
+
+const addCategoryDialog = ref();
+function addCategory() {
+  addCategoryDialog.value.openDialog();
+}
+
+function addUser() {
+
+}
+
+function addRecord() {
+
+}
+
 export default {
   components: {
     OverallDonationTable,
     OverallCategory,
-    OverallUserTable
+    OverallUserTable,
+    AddCategoryDialog
   },
   setup() {
     onMounted(() => {
@@ -50,6 +74,7 @@ export default {
       }
     });
 
-    return { tabHeader, tab, overallCategory, switchTag, overallTable, setTable, donationEditDialog, openDialog };
+    return { tabHeader, tab, menus, overallCategory, switchTag, overallTable, setTable, 
+             donationEditDialog, openDialog, menuSelected, addCategoryDialog };
   }
 }

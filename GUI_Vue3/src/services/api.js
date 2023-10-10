@@ -4,7 +4,7 @@ const httpRequest = axios.create({
   baseURL: import.meta.env.VITE_REST_BASE_URL,
   headers: { 'Content-Type': 'application/json',
              'Accept' : 'application/json'
-            }
+           }
 });
 
 // 攔截 API response 的回傳
@@ -13,7 +13,7 @@ httpRequest.interceptors.response.use(response  => {
   return Promise.resolve(response);
 }, error => {
   // 這邊當API發生錯誤的時候就可以處理 Error handling
-  console.log(error.response);
+  // console.log(error.response);
   
   return Promise.reject(error.response.data);
 })
@@ -23,7 +23,6 @@ export const apiGetDataService = (url) => httpRequest.get(url);
 
 // Post service
 export const apiPostDataService = (url, data) => httpRequest.post(url, data);
-// export const apiQueryUserDonateData = (url) => httpRequest.get(url);
 
-// export const apiUserDonateList = () => httpRequest.get('UserDonateService/GetAllInformation');
-// export const apiUserDonateOverDraft = () => httpRequest.get('UserDonateService/GetOverDraft');
+// Delete service
+export const apiDeleteDataService = (url, data) => httpRequest.delete(url, data);

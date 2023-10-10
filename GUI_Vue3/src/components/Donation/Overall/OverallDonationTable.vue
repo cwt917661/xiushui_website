@@ -1,7 +1,6 @@
 <!-- 待處理 -->
 <template>
     <VDataTable
-        v-model:items-per-page="reactVals.itemsPerPage"
         fixed-header
         :height="constVals.tableHeight"
         :headers="constVals.headers"
@@ -18,14 +17,16 @@
       </v-chip>
     </template>
     <template  v-slot:top>
-      <UserContactInfo ref="contactInfo" />
-      <UserPaymentInfo ref="paymentInfo" />
+      <UserContactDialog ref="contactInfo" />
+      <UserPaymentDialog ref="paymentInfo" />
     </template>
     <template v-slot:item.actions="{ item }">
       <v-tooltip location="bottom">
         <template v-slot:activator="{ props }">
           <v-icon
-            color="primary"
+            class="mr-3"
+            color="cyan-darken-3"
+            size="large"
             v-bind="props"
             @click="viewContact(item)"
           >
@@ -40,6 +41,7 @@
           <v-icon
             color="amber darken-4"
             v-bind="props"
+            size="large"
             @click="payment(item)"
           >
             mdi-currency-usd

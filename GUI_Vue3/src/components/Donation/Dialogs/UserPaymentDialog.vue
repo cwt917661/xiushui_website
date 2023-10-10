@@ -6,6 +6,7 @@ const openDialog = (data) => {
     dialog.value = true;
     item.value = data;
 };
+const numberRule = [ value => !!value && Number.isInteger(value) && value > 0 || '請輸入正確金額' ];
 
 defineExpose({ openDialog });
 </script>
@@ -64,7 +65,7 @@ defineExpose({ openDialog });
                             <v-icon icon="mdi-cash-register" color="indigo"></v-icon>
                             繳費
                         </template>
-                        <v-text-field outlined v-model="item.paid" />
+                        <v-text-field outlined v-model.number="item.paid" :rules="numberRule" />
 
                     </v-list-item>
                     <v-divider></v-divider>
