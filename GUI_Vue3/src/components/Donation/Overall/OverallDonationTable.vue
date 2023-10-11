@@ -7,6 +7,7 @@
         :items="reactVals.tableData"
         item-value="name"
         class="elevation-1"
+        hover
     >
     <template v-slot:item.payment="{ item }">
       <v-chip
@@ -25,7 +26,7 @@
         <template v-slot:activator="{ props }">
           <v-icon
             class="mr-3"
-            color="cyan-darken-3"
+            color="#5fb6fd"
             size="large"
             v-bind="props"
             @click="viewContact(item)"
@@ -39,7 +40,7 @@
       <v-tooltip location="bottom">
         <template v-slot:activator="{ props }">
           <v-icon
-            color="amber darken-4"
+            color="#ffa425"
             v-bind="props"
             size="large"
             @click="payment(item)"

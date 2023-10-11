@@ -8,10 +8,11 @@
     class="elevation-1" 
     :height="constVals.tableHeight"
     v-model:expanded="reactVals.expanded"
+    hover
     >
     <template v-slot:expanded-row="{ columns }">
       <tr>
-        <td :colspan="columns.length">
+        <td :colspan="columns.length" class="expand-background">
           <SingleUserDonationTable :data="reactVals.userDonationData" />
         </td>
       </tr>
@@ -21,7 +22,7 @@
       <v-tooltip location="bottom">
         <template v-slot:activator="{ props }">
           <v-icon 
-            color="cyan-darken-1" 
+            color="#5fb6fd" 
             v-bind="props" 
             size="large" 
             @click="addNewDonation(item)"
@@ -35,7 +36,7 @@
         <template v-slot:activator="{ props }">
           <v-icon 
             class="mx-3"
-            color="red-darken-3" 
+            color="#ffb44c" 
             v-bind="props"
             size="large" 
             @click="editDonation(item)">
@@ -47,6 +48,7 @@
       <v-tooltip location="bottom">
         <template v-slot:activator="{ props }">
           <v-icon 
+            color="#9E9E9E" 
             v-bind="props"
             size="large" 
             @click="onExpand(item, index)">
@@ -61,4 +63,3 @@
   </v-data-table>
 </template>
 <script src="./OverallUserTable.js"></script>
-  

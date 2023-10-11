@@ -10,7 +10,11 @@ const tabHeader = [
   { icon: 'mdi-text-box-search-outline', text: '點燈記錄查詢' }
 ];
 
-const menus = [ '新增種類', '新增祈福人', '新增紀錄'];
+const menus = [
+  { name: '編輯類別', icon: 'mdi-shape-plus-outline' },
+  { name: '新增祈福人', icon: 'mdi-account' },
+  { name: '新增點燈紀錄', icon: 'mdi-text-box-outline' }
+];
 
 const tab = ref(0);
 

@@ -24,7 +24,7 @@ function callService(instance, url) {
       instance.$emit('tableDataReady', donations.value);
     } else {
       // error handling
-      console.error('Get user donation list error: ' + error);
+      console.error('Get user donation list error: ' + error.value);
     }
   });
 }

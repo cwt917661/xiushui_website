@@ -26,16 +26,16 @@ public class DonateCategoryController
 	@Autowired
 	private DonateCategoryService donateCategoryService;
 	
-	@GetMapping("GetAllCategory")
-    public ResponseEntity<RespRestResponse<Object>> getAllCategory()
+	@GetMapping("GetAllCategories")
+    public ResponseEntity<RespRestResponse<Object>> getAllCategories()
 	{
 		try {
-			List<DonateCategory> catgories = donateCategoryService.getAllCategory();
+			List<DonateCategory> catgories = donateCategoryService.getAllCategories();
 			
 			RespRestResponse<Object> response
 							= new RespRestResponse<Object>();
 			response.setRespData(catgories);
-			response.setErrMsg("Add new category successfully.");
+			response.setErrMsg("Get all categories successfully.");
 	        return new ResponseEntity<>(response, HttpStatus.OK);			
 		} catch(Exception e) {
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
@@ -45,7 +45,7 @@ public class DonateCategoryController
     }
 	
 	@PostMapping("AddNewCategory")
-    public ResponseEntity<RespRestResponse<Object>> AddNewCategory(@RequestBody RqstModifyDonateCategory category)
+    public ResponseEntity<RespRestResponse<Object>> addNewCategory(@RequestBody RqstModifyDonateCategory category)
 	{
 		try {
 			DonateCategory result = donateCategoryService.addNewCategory(category.getName());
@@ -64,7 +64,7 @@ public class DonateCategoryController
 	
 	
 	@DeleteMapping("DeleteById")
-	public ResponseEntity<RespRestResponse<String>> DeletebyId(@RequestBody RqstModifyDonateCategory category)
+	public ResponseEntity<RespRestResponse<String>> deletebyId(@RequestBody RqstModifyDonateCategory category)
 	{
 		try {
 			donateCategoryService.deleteById(category.getId());

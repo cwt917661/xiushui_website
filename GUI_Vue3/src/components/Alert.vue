@@ -1,66 +1,58 @@
 <template>
-    <v-alert
-        :color="type"
-        :icon="icon"
-        :title="type"
-        :text="alertMsg"
-  ></v-alert>
+  <v-alert
+    v-model="alert" 
+    :color="alertColor" 
+    :icon="alertIcon"
+    :title="alertTitle" 
+    closable
+    variant="tonal"
+  >
+  <span v-html="alertMsg"></span>
+  </v-alert>
 </template>
-  
+
 <script setup>
-  import {ref} from 'vue';
+import { ref } from 'vue';
 
-  const type = ref(null);
-  const elapse = ref(null);
-  const icon = ref(null);
-  const alertMsg = ref('');
+const alertColor = ref('');
+const alertIcon = ref('');
+const alertMsg = ref('');
+const alertTitle = ref('');
+const alert = ref(false);
 
-  function showSuccess(msg) {
-    icon = 'mdi-alert-circle-outline';
-    type = 'success';
-    alertMsg = msg;
-    showAlert();
-  }
+const showSuccess = (title, message) => {
+  alertColor.value = "success";
+  alertIcon.value = "$success";
+  alertTitle.value = title;
+  alertMsg.value = message;
+  alert.value = true;
+  setTimeout(() => { alert.value = false }, 1000);
+};
 
-  function showInfo(msg) {
-    icon = 'mdi-alert-circle-outline';
-    type = 'info';
-    alertMsg = msg;
-    showAlert();
-  }
+const showInfo = (title, message) => {
+  alertColor.value = "info";
+  alertIcon.value = "$info";
+  alertTitle.value = title;
+  alertMsg.value = message;
+  alert.value = true;
+  setTimeout(() => { alert.value = false }, 1000);
+};
 
-  function showWarning(msg) {
-    icon = 'mdi-alert-outline';
-    type = 'warning';
-    alertMsg = msg;
-    showAlert();
-  }
+const showError = (title, message) => {
+  alertColor.value = "error";
+  alertIcon.value = "$error";
+  alertTitle.value = title;
+  alertMsg.value = message;
+  alert.value = true;
+};
 
-  function showError(msg) {
-    icon = 'mdi-alert-octagram-outline';
-    type = 'error';
-    alertMsg = msg;
-    showAlert();
-  }
+const showWarning = (title, message) => {
+  alertColor.value = "warning";
+  alertIcon.value = "$warning";
+  alertTitle.value = title;
+  alertMsg.value = message;
+  alert.value = true;
+};
 
-  function showAlert () {
-    let timer = showAlert.timer;
-    if (timer)clearTimeout(timer);
-
-    showAlert.timer = setTimeout(() => {
-      type = null;
-    }, 3000);
-  
-    elapse = 1;
-    let t = showAlert.t;
-    if (t) clearInterval(t);
-    showAlert.t = setInterval(() => {
-      if (elapse === 3) {
-        elapse = 0;
-        clearInterval(showAlert.t);
-      }
-      else elapse++;
-    }, 1000);
-  }
-
-  </script>  
+defineExpose({ showSuccess, showInfo, showError, showWarning });
+</script>  

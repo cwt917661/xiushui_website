@@ -51,7 +51,7 @@ const onExpand = (item, index) => {
         }));
       } else {
         // error handling
-        console.error('Get donation data by user id: ' + error);
+        console.error('Get donation data by user id: ' + error.value);
       }
     });
   }
@@ -80,7 +80,7 @@ export default {
         reactVals.tableData = users;
       } else {
         // error handling
-        console.error('Get user list error: ' + error);
+        console.error('Get user list error: ' + error.value);
       }
     });
 

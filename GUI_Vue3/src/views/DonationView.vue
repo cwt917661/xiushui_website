@@ -11,13 +11,16 @@
       <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn variant="outlined" class="mx-2" elevation="2" v-bind="props">
-            <v-icon>mdi-plus-box</v-icon>
-            新增
+            <v-icon>mdi-cog-outline</v-icon>
+            設定
           </v-btn>
         </template>
         <v-list>
           <v-list-item v-for="(item, index) in menus" :key="index" :value="item" @click="menuSelected(index)">
-            <v-list-item-title>{{ item }}</v-list-item-title>
+            <template v-slot:prepend>
+              <v-icon :icon="item.icon"></v-icon>
+            </template>
+            <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -42,13 +45,11 @@
         <!-- 個人點燈紀錄 -->
         <v-card flat>
           <OverallUserTable ref="overallUserTable" />
-          <!-- <user-donation-table ref="userDonationTable"></user-donation-table> -->
         </v-card>
       </v-window-item>
       <v-window-item>
         <!-- 點燈記錄查詢 -->
         <v-card class="mx-auto">
-          <!-- <donation-table></donation-table> -->
         </v-card>
       </v-window-item>
     </v-window>

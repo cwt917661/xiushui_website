@@ -1,10 +1,14 @@
 <template>
     <v-dialog :max-width="constVals.dialogWidth" v-model="reactVals.dialog">
         <v-card>
-            <v-card-title>
-                <v-icon icon="mdi-shape-plus" large left />
-                <span class="title font-weight-light">新增種類</span>
-            </v-card-title>
+            <v-toolbar color="grey-lighten-3" dark>
+                <v-toolbar-title>
+                    <v-icon icon="mdi-shape-plus" large left class="mr-3"/>
+                    新增種類
+                </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn variant="text" icon="mdi-window-close" @click="reactVals.dialog=false;" />
+            </v-toolbar>
             <v-card-text>
                 <v-container>
                     <v-row>
@@ -14,7 +18,8 @@
                                     label="名稱"
                                     clearable 
                                     v-model="reactVals.catgName" 
-                                    :rules="[constVals.required, constVals.duplicate]" />
+                                    :rules="[constVals.required, constVals.duplicate]"
+                                />
                                 <v-btn 
                                     :disabled="!reactVals.form" 
                                     :loading="reactVals.loading" 
@@ -25,6 +30,7 @@
                                     variant="elevated">
                                     新增</v-btn>
                             </v-form>
+                            <Alert ref="alert" class="mt-3" />
                         </v-col>
                         <v-col>
                             <v-table fixed-header :height="constVals.tableHeight">

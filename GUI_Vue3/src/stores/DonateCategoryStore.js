@@ -19,7 +19,7 @@ export const useDonateCategoryStore = defineStore({
             this.error = null;
             this.categories = [];
             this.loading = true;
-            var url = import.meta.env.VITE_REST_URL_DONATE_CATEGORY_GET_ALLINFO;
+            var url = import.meta.env.VITE_REST_URL_DONATECATEGORY_GET_ALLINFO;
             try {
                 await apiGetDataService(url)
                     .then((response) => {
@@ -37,7 +37,7 @@ export const useDonateCategoryStore = defineStore({
             this.error = null;
             this.category = null;
             this.loading = true;
-            var url = import.meta.env.VITE_REST_URL_DONATE_CATEGORY_ADD_NEW;
+            var url = import.meta.env.VITE_REST_URL_DONATECATEGORY_ADD_NEW;
             try {
                 await apiPostDataService(url, sendData)
                     .then((response) => {
@@ -54,7 +54,7 @@ export const useDonateCategoryStore = defineStore({
         async DeleteCategory(sendData) {
             this.error = null;
             this.loading = true;
-            var url = import.meta.env.VITE_REST_URL_DONATE_CATEGORY_DELETE;
+            var url = import.meta.env.VITE_REST_URL_DONATECATEGORY_DELETE;
             try {
                 this.success = await apiDeleteDataService(url, sendData)
                     .then(() => true)
