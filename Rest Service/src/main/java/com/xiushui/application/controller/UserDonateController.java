@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xiushui.application.entity.UserDonate;
-import com.xiushui.application.mapper.DonateCategoryResponseMapper;
 import com.xiushui.application.mapper.UserDonateResponseMapper;
 import com.xiushui.application.request.RqstGetUserByInfo;
 import com.xiushui.application.response.RespRestResponse;

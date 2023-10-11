@@ -20,7 +20,7 @@ public class DonateCategoryServiceImpl implements DonateCategoryService
 	private UserDonateRepository userDonateRepository;
 
 	@Override
-	public List<DonateCategory> getAllCategory()
+	public List<DonateCategory> getAllCategories()
 	{
 		return donateCategoryRepository.findAll();
 		

@@ -6,7 +6,7 @@ import com.xiushui.application.entity.DonateCategory;
 
 public interface DonateCategoryService
 {
-	List<DonateCategory> getAllCategory();
+	List<DonateCategory> getAllCategories();
 	
 	DonateCategory addNewCategory(String category) throws Exception;
 	

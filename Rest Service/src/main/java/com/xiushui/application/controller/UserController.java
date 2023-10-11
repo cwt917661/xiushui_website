@@ -43,10 +43,10 @@ public class UserController
     }
 	
 	@PostMapping("GetUsersByName")
-    public ResponseEntity<RespRestResponse<Object>> getUsersByInfo(@RequestBody RqstGetUserByInfo userInfo)
+    public ResponseEntity<RespRestResponse<Object>> getUsersByName(@RequestBody RqstGetUserByInfo userInfo)
 	{
 		try {
-	        List<User> users = userService.getUserByInfo(userInfo.getName());
+	        List<User> users = userService.getUserByName(userInfo.getName());
 			RespRestResponse<Object> response
 							= new RespRestResponse<Object>();
 			response.setRespData(users);

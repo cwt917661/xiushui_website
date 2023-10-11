@@ -22,7 +22,7 @@ public class UserSericeImpl implements UserService
 	}
 
 	@Override
-	public List<User> getUserByInfo(String name)
+	public List<User> getUserByName(String name)
 	{
 		return userRepository.findByName(name);
 	}
