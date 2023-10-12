@@ -5,6 +5,7 @@
         :height="constVals.tableHeight"
         :headers="constVals.headers"
         :items="reactVals.tableData"
+        :loading="reactVals.loading"
         item-value="name"
         class="elevation-1"
         hover

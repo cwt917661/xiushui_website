@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useDonateCategoryStore } from '@/stores/DonateCategoryStore';
-import Alert from '@/components/Alert.vue';
+import Alert from '@/components/Notifiers/Alert.vue';
 
 const constVals = {
     tableHeight: window.innerHeight * 0.6,

@@ -4,9 +4,11 @@ import SingleUserDonationTable from './SingleUserDonationTable.vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/UserStore';
 import { useUserDonateStore } from '@/stores/UserDonateStore';
+import { useSnackBarStore } from '@/stores/SnackBarStore';
+
 
 const constVals = reactive({
-  tableHeight: window.innerHeight * 0.5,
+  tableHeight: window.innerHeight * 0.4,
   headers: [
     {
       title: '姓名',
@@ -26,20 +28,44 @@ const reactVals = reactive({
   expanded: [],
   editedIndex: -1,
   editedItem: {},
-  userDonationData: []
+  userDonationData: [],
+  loading: false,
+  search: '',
 });
 
-const onExpand = (item, index) => {
+const open = () => {
+   // initiallize table data
+   reactVals.loading = 'primary';
+   const { users, success, error } = storeToRefs(useUserStore());
+   const { fetchAll } = useUserStore();
+   fetchAll().then(() => {
+     if (success.value) {
+       reactVals.tableData = users;
+       reactVals.loading = false;
+       const snackBarStore = useSnackBarStore();
+       snackBarStore.showMessage('取得使用者清單成功', 'success');
+     } else {
+       // error handling
+       console.error('Get user list error: ' + error.value);
+       const snackBarStore = useSnackBarStore();
+       snackBarStore.showMessage('[取得使用者清單失敗]<br>[錯誤訊息] ' + error.value, 'error');
+     }
+   });
+};
+
+const onExpand = (item) => {
+  // find the real index of selected item
+  var index = reactVals.tableData.indexOf(item);
   // if already expanded , close it
-  if(reactVals.expanded.some(e => e == (index+1))) reactVals.expanded.shift();
-  else{
+  if (reactVals.expanded.some(e => e == (index + 1))) reactVals.expanded.shift();
+  else {
     // expand one at one time
     reactVals.expanded.shift();
-    reactVals.expanded.push(index+1);
+    reactVals.expanded.push(index + 1);
   }
 
   // start expand
-  if(reactVals.expanded.length == 1) {
+  if (reactVals.expanded.length == 1) {
     var sendData = { id: item.id };
 
     const { donations, success, error } = storeToRefs(useUserDonateStore());
@@ -52,6 +78,8 @@ const onExpand = (item, index) => {
       } else {
         // error handling
         console.error('Get donation data by user id: ' + error.value);
+        const snackBarStore = useSnackBarStore();
+        snackBarStore.showMessage('[取得記錄失敗]<br>[錯誤訊息] ' + error.value, 'error');
       }
     });
   }
@@ -71,20 +99,8 @@ export default {
     SingleUserDonationTable
   },
   setup() {
-    // initiallize table data
-
-    const { users, success, error } = storeToRefs(useUserStore());
-    const { fetchAll } = useUserStore();
-    fetchAll().then(() => {
-      if (success.value) {
-        reactVals.tableData = users;
-      } else {
-        // error handling
-        console.error('Get user list error: ' + error.value);
-      }
-    });
-
-    return { constVals, reactVals, onExpand, addNewDonation, editDonation };
+    open();
+    return { constVals, reactVals, onExpand, addNewDonation, editDonation, open };
   },
 
 }

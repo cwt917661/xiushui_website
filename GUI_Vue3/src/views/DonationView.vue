@@ -37,7 +37,7 @@
       <v-window-item>
         <!-- 待處理列表 -->
         <v-card class="mx-auto">
-          <OverallCategory ref="overallCategory" @tableDataReady="setTable" />
+          <OverallCategory ref="overallCategory" @dataLoading="dataLoading" @tableDataReady="setTable" />
           <OverallDonationTable ref="overallTable" />
         </v-card>
       </v-window-item>

@@ -1,5 +1,14 @@
 <!-- 個人點燈紀錄 -->
 <template>
+    <v-card-title>
+      <v-text-field
+        v-model="reactVals.search"
+        prepend-icon="mdi-magnify"
+        label="搜尋"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
   <v-data-table 
     fixed-header 
     :headers="constVals.headers"
@@ -9,7 +18,8 @@
     :height="constVals.tableHeight"
     v-model:expanded="reactVals.expanded"
     hover
-    >
+    :loading="reactVals.loading"
+    :search="reactVals.search">
     <template v-slot:expanded-row="{ columns }">
       <tr>
         <td :colspan="columns.length" class="expand-background">
@@ -18,7 +28,7 @@
       </tr>
     </template>
 
-    <template v-slot:item.actions="{ item, index }">
+    <template v-slot:item.actions="{ item }">
       <v-tooltip location="bottom">
         <template v-slot:activator="{ props }">
           <v-icon 
@@ -51,7 +61,7 @@
             color="#9E9E9E" 
             v-bind="props"
             size="large" 
-            @click="onExpand(item, index)">
+            @click="onExpand(item)">
             mdi-arrow-down-drop-circle-outline
           </v-icon>
         </template>

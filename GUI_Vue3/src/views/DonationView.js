@@ -4,6 +4,7 @@ import OverallCategory from '@/components/Donation/Overall/OverallCategory.vue';
 import OverallUserTable from '@/components/Donation/User/OverallUserTable.vue';
 import AddCategoryDialog from '@/components/Donation/Dialogs/AddCategoryDialog.vue';
 
+
 const tabHeader = [
   { icon: 'mdi-alert-outline', text: '待處理' },
   { icon: 'mdi-badge-account-horizontal-outline', text: '個人點燈紀錄' },
@@ -19,11 +20,15 @@ const menus = [
 const tab = ref(0);
 
 const overallCategory = ref();
+const overallUserTable = ref();
 const switchTag = (index) => {
-  // console.log(tabHeader[index].text);
   // 待處理
   if (index == 0) {
     overallCategory.value.changeType(0);
+  }
+  // 個人點燈紀錄
+  else if(index == 1) {
+    if(overallUserTable.value != undefined) overallUserTable.value.open();
   }
 };
 
@@ -32,6 +37,7 @@ const setTable = (tableData) => {
   // console.log(tableData);
   overallTable.value.setData(tableData);
 };
+const dataLoading = () => overallTable.value.dataLoading();
 
 const donationEditDialog = ref();
 const openDialog = () => {
@@ -78,7 +84,8 @@ export default {
       }
     });
 
-    return { tabHeader, tab, menus, overallCategory, switchTag, overallTable, setTable, 
+    return { tabHeader, tab, menus, overallCategory, overallUserTable, switchTag, 
+             overallTable, setTable, dataLoading,
              donationEditDialog, openDialog, menuSelected, addCategoryDialog };
   }
 }

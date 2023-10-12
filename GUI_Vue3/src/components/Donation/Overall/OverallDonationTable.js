@@ -23,13 +23,17 @@ const constVals = reactive({
 const reactVals = reactive({
   tableData: [],
   editedIndex: -1,
-  editedItem: {}
+  editedItem: {},
+  loading: false,
 });
+
+const dataLoading = () => reactVals.loading = 'primary';
 
 const setData = (data) => {
   reactVals.tableData = data.map((obj) => Object.assign({}, obj, {
     payment : obj.totalAmount - obj.currentPaid        
   }));
+  reactVals.loading = false;
 }
 
 const getColor = (payment) => {
@@ -68,10 +72,12 @@ export default {
     UserContactDialog,
     UserPaymentDialog,
   },
-  setup() {
+  setup(prop, {expose}) {
+
+    expose({ setData, dataLoading });
     return{
       constVals, reactVals, contactInfo, paymentInfo,
-      setData, getColor, viewContact, payment
+      dataLoading, setData, getColor, viewContact, payment, 
     };
   }
 }

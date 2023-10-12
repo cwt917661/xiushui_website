@@ -62,7 +62,6 @@ defineExpose({ openDialog });
                         </template>
                         <v-list-item-title v-text="item.address"></v-list-item-title>
                     </v-list-item>
-                    <v-divider></v-divider>
                 </v-list>
             </v-card-text>
         </v-card>

@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar absolute color="teal lighten-2" dark>
+    <v-app-bar absolute color="teal-lighten-2" dark>
       <img src="@/assets/logo.png"/>
       <strong class="subheading">唯心聖教  秀水太極道場</strong>
     </v-app-bar>
