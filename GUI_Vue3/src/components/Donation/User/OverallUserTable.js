@@ -4,7 +4,7 @@ import SingleUserDonationTable from './SingleUserDonationTable.vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/UserStore';
 import { useUserDonateStore } from '@/stores/UserDonateStore';
-import { useSnackBarStore } from '@/stores/SnackBarStore';
+import { useSnackBarStore } from '@/stores/GlobalComponentStore';
 
 
 const constVals = reactive({
@@ -36,11 +36,11 @@ const reactVals = reactive({
 const open = () => {
    // initiallize table data
    reactVals.loading = 'primary';
-   const { users, success, error } = storeToRefs(useUserStore());
+   const { userList, success, error } = storeToRefs(useUserStore());
    const { fetchAll } = useUserStore();
    fetchAll().then(() => {
      if (success.value) {
-       reactVals.tableData = users;
+       reactVals.tableData = userList;
        reactVals.loading = false;
        const snackBarStore = useSnackBarStore();
        snackBarStore.showMessage('取得使用者清單成功', 'success');
@@ -68,11 +68,11 @@ const onExpand = (item) => {
   if (reactVals.expanded.length == 1) {
     var sendData = { id: item.id };
 
-    const { donations, success, error } = storeToRefs(useUserDonateStore());
+    const { donationList, success, error } = storeToRefs(useUserDonateStore());
     const { fetchByUserId } = useUserDonateStore();
     fetchByUserId(sendData).then(() => {
       if (success.value) {
-        reactVals.userDonationData = donations.value.map((obj) => Object.assign({}, obj, {
+        reactVals.userDonationData = donationList.value.map((obj) => Object.assign({}, obj, {
           payment: obj.totalAmount - obj.currentPaid
         }));
       } else {

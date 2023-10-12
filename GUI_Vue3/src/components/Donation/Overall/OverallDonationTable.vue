@@ -20,7 +20,7 @@
     </template>
     <template  v-slot:top>
       <UserContactDialog ref="contactInfo" />
-      <UserPaymentDialog ref="paymentInfo" />
+      <UserPaymentDialog ref="paymentInfo" @dialogClosed="paymentClosed"/>
     </template>
     <template v-slot:item.actions="{ item }">
       <v-tooltip location="bottom">

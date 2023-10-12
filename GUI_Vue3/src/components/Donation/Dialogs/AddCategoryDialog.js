@@ -1,6 +1,7 @@
 import { ref, reactive } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useDonateCategoryStore } from '@/stores/DonateCategoryStore';
+import { useConirmStore } from '@/stores/GlobalComponentStore';
 import Alert from '@/components/Notifiers/Alert.vue';
 
 const constVals = {
@@ -20,12 +21,12 @@ const reactVals = reactive({
 
 const openDialog = () => {
     // get all categories
-    const { categories, success, error } = storeToRefs(useDonateCategoryStore());
+    const { catgList, success, error } = storeToRefs(useDonateCategoryStore());
     const { fetchAll } = useDonateCategoryStore();
     fetchAll().then(() => {
         // console.log(error.value);
         if(success.value) {
-            reactVals.catgItems = categories;
+            reactVals.catgItems = catgList;
             reactVals.dialog = true;
         } else {
             // error handling
@@ -48,6 +49,7 @@ const onSubmit = () => {
             reactVals.catgItems.push(category.value);
             reactVals.loading = false;
             alert.value.showSuccess('新增成功', '已新增 「' + reactVals.catgName + '」');
+            reactVals.catgName = '';
             reactVals.form = false;
         } else {
             // error handling
@@ -58,8 +60,10 @@ const onSubmit = () => {
 };
 
 const onDelete = (item, index) => {
-    var sendData = {data:{ id: item.id }};
 
+    // const confirm = useConirmStore();
+    // confirm.showConfirm('刪除類別', '確定要刪除 [' + item.name + '] 嗎？');
+    var sendData = {data:{ id: item.id }};
     const { success, error } = storeToRefs(useDonateCategoryStore());
     const { DeleteCategory } = useDonateCategoryStore();
 

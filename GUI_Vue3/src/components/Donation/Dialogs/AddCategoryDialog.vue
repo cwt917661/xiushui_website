@@ -33,6 +33,7 @@
                             <Alert ref="alert" class="mt-3" />
                         </v-col>
                         <v-col>
+                            <v-card>
                             <v-table fixed-header :height="constVals.tableHeight">
                                 <thead>
                                     <tr>
@@ -62,6 +63,7 @@
                                     </tr>
                                 </tbody>
                             </v-table>
+                        </v-card>
                         </v-col>
                     </v-row>
                 </v-container>

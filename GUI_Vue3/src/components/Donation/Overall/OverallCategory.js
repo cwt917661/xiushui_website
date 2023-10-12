@@ -1,6 +1,6 @@
 import { storeToRefs } from 'pinia';
 import { useUserDonateStore } from '@/stores/UserDonateStore';
-import { useSnackBarStore } from '@/stores/SnackBarStore';
+import { useSnackBarStore } from '@/stores/GlobalComponentStore';
 
 const chiplist = [
   { color: 'error', icon: 'mdi-alert-decagram', text: '未繳費' },
@@ -22,11 +22,11 @@ export default {
     };
     
     const callService = (url) => {
-      const { donations, success, error } = storeToRefs(useUserDonateStore());
+      const { donationList, success, error } = storeToRefs(useUserDonateStore());
       const { fetchOverallData } = useUserDonateStore();
       fetchOverallData(url).then(() => {
         if (success.value) {
-          emit('tableDataReady', donations.value);
+          emit('tableDataReady', donationList.value);
           const snackBarStore = useSnackBarStore();
           snackBarStore.showMessage('取得記錄成功 ', 'success');
         } else {

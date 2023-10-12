@@ -1,21 +1,15 @@
 <script setup>
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useSnackBarStore } from '@/stores/SnackBarStore';
+import { useSnackBarStore } from '@/stores/GlobalComponentStore';
 
-const snackbar = ref(false);
-// const text = ref();
-// const color = ref('');
-const { message, color, timeout } = storeToRefs(useSnackBarStore());
+const { message, color, show: snackbar } = storeToRefs(useSnackBarStore());
 const store = useSnackBarStore();
 const delayTime = ref();
-store.$onAction(() => {
-    // console.log('show store');
-    if (timeout) delayTime.value = 1000;
+store.$subscribe((mutation, state) => {
+    if(state.timeout) delayTime.value = 2000;
     else delayTime.value = -1;
-    snackbar.value = true;
-}, true);
-
+});
 
 </script>
 <template>

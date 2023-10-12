@@ -48,7 +48,8 @@ const viewContact = (item) => {
     type: item.userType,
     phone: item.userPhone,
     email: item.userEmail,
-    address: item.userAddress
+    address: item.userAddress,
+    id: item.id,
   };
   contactInfo.value.openDialog(contactData);
 }
@@ -60,11 +61,17 @@ const payment = (item) => {
     userType: item.userType,
     type: item.category,
     phone: item.phone,
-    payment: item.payment
+    payment: item.payment,
+    id: item.id,
   };
   paymentInfo.value.openDialog(paymentData);
 }
 
+const paymentClosed = (data) => {
+  var idx = reactVals.tableData.findIndex((element) => element.id == data.id);
+  // console.log(idx);
+  reactVals.tableData[idx].payment = data.payment;
+};
 
 export default {
   components: {
@@ -77,7 +84,7 @@ export default {
     expose({ setData, dataLoading });
     return{
       constVals, reactVals, contactInfo, paymentInfo,
-      dataLoading, setData, getColor, viewContact, payment, 
+      dataLoading, setData, getColor, viewContact, payment, paymentClosed,
     };
   }
 }
