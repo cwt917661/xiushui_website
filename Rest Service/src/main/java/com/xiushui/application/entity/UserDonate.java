@@ -6,8 +6,6 @@ import java.sql.Timestamp;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -60,7 +58,6 @@ public class UserDonate
 	@Column(nullable = false)
 	private int currentPaid;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(nullable = false)
 	private Date dueDt;
 	
@@ -74,4 +71,5 @@ public class UserDonate
 	
 	@UpdateTimestamp
 	private Timestamp updateDt;
+	
 }

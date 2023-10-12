@@ -28,7 +28,7 @@ public class PaidRecord
 	private long id;
 	
 	@Column(nullable = false)
-	private int userDonateId;
+	private long userDonateId;
 	
 	@Column(nullable = false)
 	private int paid;

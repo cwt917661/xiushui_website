@@ -6,7 +6,7 @@ import com.xiushui.application.entity.PaidRecord;
 
 public interface PaidRecordService
 {
-	List<PaidRecord> getAllRecords();
+	List<PaidRecord> getAllRecords(long userDonationId);
 		
-	PaidRecord addNewRecord(PaidRecord category) throws Exception;
+	PaidRecord addNewRecord(PaidRecord record) throws Exception;
 }
