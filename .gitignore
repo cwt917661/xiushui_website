@@ -20,4 +20,4 @@ Docker/mysql_data
 Docker/service/*.war
 Docker/.env
 Docker/init_sql/create_user.sql
-GUI_Vue3/package-lock.json
+
