@@ -1,5 +1,5 @@
 <template>
-    <v-dialog :max-width="constVals.dialogWidth" v-model="reactVals.dialog">
+    <v-dialog :max-width="constVals.dialogWidth" v-model="reactVals.dialog" persistent>
         <v-card>
             <v-toolbar color="grey-lighten-3" dark>
                 <v-toolbar-title>
@@ -19,15 +19,7 @@
                                         <v-icon icon="mdi-account" color="#0266c9" class="mr-2" />
                                         姓名
                                     </template>
-                                    <v-list-item-title v-text="reactVals.donation.name" />
-                                </v-list-item>
-                                <v-divider></v-divider>
-                                <v-list-item>
-                                    <template v-slot:prepend>
-                                        <v-icon icon="mdi-book-variant" color="#0266c9" class="mr-2" />
-                                        屆別
-                                    </template>
-                                    <v-list-item-title v-text="reactVals.donation.userType"></v-list-item-title>
+                                    <v-list-item-title v-text="reactVals.donation.userName" />
                                 </v-list-item>
                                 <v-divider></v-divider>
                                 <v-list-item>
@@ -35,7 +27,7 @@
                                         <v-icon icon="mdi-phone" color="#0266c9" class="mr-2" />
                                         電話
                                     </template>
-                                    <v-list-item-title v-text="reactVals.donation.phone"></v-list-item-title>
+                                    <v-list-item-title v-text="reactVals.donation.userPhone"></v-list-item-title>
                                 </v-list-item>
                                 <v-divider></v-divider>
                                 <v-list-item>
@@ -43,7 +35,23 @@
                                         <v-icon icon="mdi-lightbulb-on-outline" color="#0266c9" class="mr-2" />
                                         種類
                                     </template>
-                                    <v-list-item-title v-text="reactVals.donation.type"></v-list-item-title>
+                                    <v-list-item-title v-text="reactVals.donation.category"></v-list-item-title>
+                                </v-list-item>
+                                <v-divider></v-divider>
+                                <v-list-item>
+                                    <template v-slot:prepend>
+                                        <v-icon icon="mdi-calendar-month" color="#0266c9" class="mr-2" />
+                                        年度
+                                    </template>
+                                    <v-list-item-title v-text="reactVals.donation.year"></v-list-item-title>
+                                </v-list-item>
+                                <v-divider></v-divider>
+                                <v-list-item>
+                                    <template v-slot:prepend>
+                                        <v-icon icon="mdi-calendar-today" color="#0266c9" class="mr-2" />
+                                        到期
+                                    </template>
+                                    <v-list-item-title v-text="reactVals.donation.dueDt"></v-list-item-title>
                                 </v-list-item>
                                 <v-divider></v-divider>
                                 <v-list-item>
@@ -51,7 +59,7 @@
                                         <v-icon icon="mdi-cash" color="#0266c9" class="mr-2" />
                                         未繳
                                     </template>
-                                    <v-list-item-title v-text="reactVals.donation.payment"
+                                    <v-list-item-title v-text="reactVals.donation.unpaid"
                                         style="color:red;"></v-list-item-title>
                                 </v-list-item>
                                 <v-divider></v-divider>
@@ -64,7 +72,7 @@
 
                                     <v-text-field 
                                         density="compact" 
-                                        outlined 
+                                        variant="outlined" 
                                         v-model.number="reactVals.donation.paid"
                                         :rules="[constVals.required, constVals.isPositiveNumber, constVals.overPaid]" 
                                         maxlength="10"

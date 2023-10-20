@@ -1,15 +1,14 @@
 <template>
     <v-card-text>
       <v-chip-group
-        active-class="primary--text"
         mandatory
+        v-model="selection"
+        @update:modelValue="selectChange"
       >
         <v-chip
-          v-for="(chip,index) in chiplist"
-          :key="index"
+          v-for="chip in chiplist"
           class="mr-2"
-          @click="changeType(index)"
-          disable
+          selected-class="text-primary"
         >
         <v-icon left :color="chip.color"> {{chip.icon}} </v-icon>
         {{chip.text}}

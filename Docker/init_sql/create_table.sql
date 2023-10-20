@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS `donate_category` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `create_dt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_dt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_dt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_dt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
@@ -10,18 +10,18 @@ CREATE TABLE IF NOT EXISTS `donate_category` (
 
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `account` varchar(255) DEFAULT NULL,
   `passwd` varchar(255) DEFAULT NULL,
-  `privilege` int NOT NULL DEFAULT '0',
+  `privilege` int NOT NULL DEFAULT '1',
   `name` varchar(255) NOT NULL,
   `type` varchar(255) DEFAULT NULL,
   `birthday` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `create_dt` datetime(6) NOT NULL,
-  `update_dt` datetime(6) NOT NULL,
+  `create_dt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_dt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `account_UNIQUE` (`account`),
@@ -30,19 +30,19 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 
 CREATE TABLE IF NOT EXISTS `user_donate` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `active` varchar(5) NOT NULL DEFAULT 'Y',
-  `user_id` int NOT NULL,
-  `category_id` int NOT NULL,
+  `user_id` BIGINT NOT NULL,
+  `category_id` BIGINT NOT NULL,
   `year` varchar(10) NOT NULL,
   `payment_type` varchar(10) NOT NULL,
   `total_amount` int NOT NULL,
-  `current_paid` int NOT NULL,
+  `unpaid` int NOT NULL,
   `due_dt` date NOT NULL,
-  `sponsor` int NOT NULL,
+  `sponsor` BIGINT NOT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_dt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_dt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_dt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_dt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `UC_donateinfo` (`user_id`,`category_id`,`year`),
@@ -52,11 +52,11 @@ CREATE TABLE IF NOT EXISTS `user_donate` (
 
 
 CREATE TABLE IF NOT EXISTS `paid_record` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_donate_id` int NOT NULL,
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `user_donate_id` BIGINT NOT NULL,
   `paid` int NOT NULL,
-  `sponsor` int NOT NULL,
-  `create_dt` datetime(6) NOT NULL,
+  `sponsor` BIGINT NOT NULL,
+  `create_dt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   FOREIGN KEY (`user_donate_id`) REFERENCES `user_donate`(`id`)

@@ -19,9 +19,6 @@ public interface UserDonateResponseMapper
         @Mapping(target = "userId", source = "userDonate.userInfo.id"),
         @Mapping(target = "userName", source = "userDonate.userInfo.name"),
         @Mapping(target = "userType", source = "userDonate.userInfo.type"),
-        @Mapping(target = "userPhone", source = "userDonate.userInfo.phone"),
-        @Mapping(target = "userEmail", source = "userDonate.userInfo.email"),
-        @Mapping(target = "userAddress", source = "userDonate.userInfo.address"),
         @Mapping(target = "category", source = "userDonate.category.name")
     })
 	RespGetUserDonateInfo convert(UserDonate userDonate);

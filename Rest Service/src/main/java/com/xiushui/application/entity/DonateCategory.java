@@ -34,8 +34,10 @@ public class DonateCategory
 	private String name;
 
 	@CreationTimestamp
+	@Column(nullable = false, updatable = false, columnDefinition="timestamp default current_timestamp")
 	private Timestamp createDt;
 
 	@UpdateTimestamp
+	@Column(nullable = false, updatable = false, columnDefinition="timestamp default current_timestamp on update current_timestamp")
 	private Timestamp updateDt;
 }

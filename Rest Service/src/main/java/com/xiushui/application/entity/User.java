@@ -36,7 +36,7 @@ public class User
 
 	@Column(nullable = false)
 	@Builder.Default
-	private int privilege = 0;
+	private int privilege = 1;
 
 	@Column(nullable = false)
 	private String name;
@@ -49,12 +49,15 @@ public class User
 	private String email;
 
 	private String phone;
-
+	
+	@Column(nullable = false)
 	private String address;
 
 	@CreationTimestamp
+	@Column(nullable = false, updatable = false, columnDefinition="timestamp default current_timestamp")
 	private Timestamp createDt;
 
 	@UpdateTimestamp
+	@Column(nullable = false, updatable = false, columnDefinition="timestamp default current_timestamp on update current_timestamp")
 	private Timestamp updateDt;
 }

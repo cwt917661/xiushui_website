@@ -1,10 +1,10 @@
 <template>
-    <v-dialog :max-width="constVals.dialogWidth" v-model="reactVals.dialog">
+    <v-dialog :max-width="constVals.dialogWidth" v-model="reactVals.dialog" persistent>
         <v-card>
             <v-toolbar color="grey-lighten-3" dark>
                 <v-toolbar-title>
                     <v-icon icon="mdi-shape-plus" large left class="mr-3"/>
-                    新增種類
+                    編輯類別
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn variant="text" icon="mdi-window-close" @click="reactVals.dialog=false;" />
@@ -19,6 +19,7 @@
                                     clearable 
                                     v-model="reactVals.catgName" 
                                     :rules="[constVals.required, constVals.duplicate]"
+                                    variant="outlined"
                                 />
                                 <v-btn 
                                     :disabled="!reactVals.form" 
@@ -30,7 +31,6 @@
                                     variant="elevated">
                                     新增</v-btn>
                             </v-form>
-                            <Alert ref="alert" class="mt-3" />
                         </v-col>
                         <v-col>
                             <v-card>
@@ -72,4 +72,4 @@
         </v-card>
     </v-dialog>
 </template>
-<script src="./AddCategoryDialog.js"></script>
+<script src="./CategorySettingDialog.js"></script>

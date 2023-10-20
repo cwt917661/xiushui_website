@@ -32,11 +32,11 @@ public class UserDonateController
 	        List<UserDonate> info = userDonateService.getAllInformation();
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
 			response.setRespData(UserDonateResponseMapper.INSTANCE.convertList(info));
-			response.setErrMsg("Get donate information successfully.");
+			response.setMessage("Get donate information successfully.");
 	        return new ResponseEntity<>(response, HttpStatus.OK);			
 		} catch(Exception e) {
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
-			response.setErrMsg(e.getMessage());
+			response.setMessage(e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }
@@ -48,11 +48,11 @@ public class UserDonateController
 	        List<UserDonate> info = userDonateService.getOverDraft();
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
 			response.setRespData(UserDonateResponseMapper.INSTANCE.convertList(info));
-			response.setErrMsg("Get over draft donate information successfully.");
+			response.setMessage("Get over draft donate information successfully.");
 	        return new ResponseEntity<>(response, HttpStatus.OK);			
 		} catch(Exception e) {
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
-			response.setErrMsg(e.getMessage());
+			response.setMessage(e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }
@@ -64,11 +64,11 @@ public class UserDonateController
 	        List<UserDonate> info = userDonateService.getOnComing();
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
 			response.setRespData(UserDonateResponseMapper.INSTANCE.convertList(info));
-			response.setErrMsg("Get on coming donate information successfully.");
+			response.setMessage("Get on coming donate information successfully.");
 	        return new ResponseEntity<>(response, HttpStatus.OK);			
 		} catch(Exception e) {
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
-			response.setErrMsg(e.getMessage());
+			response.setMessage(e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }
@@ -80,11 +80,11 @@ public class UserDonateController
 			List<UserDonate> info = userDonateService.getByUserId(userInfo.getId());
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
 			response.setRespData(UserDonateResponseMapper.INSTANCE.convertList(info));
-			response.setErrMsg("Get donate information by user id successfully.");
+			response.setMessage("Get donate information by user id successfully.");
 	        return new ResponseEntity<>(response, HttpStatus.OK);			
 		} catch(Exception e) {
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
-			response.setErrMsg(e.getMessage());
+			response.setMessage(e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }

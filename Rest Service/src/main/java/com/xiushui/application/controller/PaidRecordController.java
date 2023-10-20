@@ -1,11 +1,10 @@
 package com.xiushui.application.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.xiushui.application.entity.PaidRecord;
 import com.xiushui.application.request.RqstGetPaidRecordByDonateId;
+import com.xiushui.application.response.RespGetPaidRecordsWithDonateInfo;
+import com.xiushui.application.response.RespRemainingPayment;
 import com.xiushui.application.response.RespRestResponse;
 import com.xiushui.application.service.PaidRecordService;
 
@@ -22,23 +23,23 @@ public class PaidRecordController
 {
 	@Autowired
 	private PaidRecordService paidRecordService;
-	
-	@PostMapping("GetAllRecords")
-    public ResponseEntity<RespRestResponse<Object>> getAllRecords
+		
+	@PostMapping("GetRecordsByDonationId")
+    public ResponseEntity<RespRestResponse<Object>> getRecordsByDonationId
     	(@RequestBody RqstGetPaidRecordByDonateId request)
 	{
 		try {
-			List<PaidRecord> records = 
-					paidRecordService.getAllRecords(request.getUserDonateId());
+			RespGetPaidRecordsWithDonateInfo records = 
+					paidRecordService.getRecordsByDonateId(request.getUserDonateId());
 			
 			RespRestResponse<Object> response
 							= new RespRestResponse<Object>();
 			response.setRespData(records);
-			response.setErrMsg("Get all paid record successfully.");
+			response.setMessage("Get all paid record successfully.");
 	        return new ResponseEntity<>(response, HttpStatus.OK);			
 		} catch(Exception e) {
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
-			response.setErrMsg(e.getMessage());
+			response.setMessage(e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }
@@ -47,16 +48,33 @@ public class PaidRecordController
     public ResponseEntity<RespRestResponse<Object>> addNewRecord(@RequestBody PaidRecord record)
 	{
 		try {
-			PaidRecord result = paidRecordService.addNewRecord(record);
+			RespRemainingPayment result = paidRecordService.addNewRecord(record);
 			
 			RespRestResponse<Object> response
 							= new RespRestResponse<Object>();
 			response.setRespData(result);
-			response.setErrMsg("Add new paid record successfully.");
+			response.setMessage("Add new paid record successfully.");
 	        return new ResponseEntity<>(response, HttpStatus.OK);			
 		} catch(Exception e) {
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
-			response.setErrMsg(e.getMessage());
+			response.setMessage(e.getMessage());
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+    }
+	
+	@DeleteMapping("DeleteById")
+	public ResponseEntity<RespRestResponse<Object>> deleteById(@RequestBody PaidRecord record)
+	{
+		try {
+			int unpaid = paidRecordService.deleteById(record.getId());
+			RespRestResponse<Object> response
+					= new RespRestResponse<Object>();
+			response.setRespData(unpaid);
+			response.setMessage("Delete record successfully.");
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} catch (Exception e) {
+			RespRestResponse<Object> response = new RespRestResponse<Object>();
+			response.setMessage(e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }

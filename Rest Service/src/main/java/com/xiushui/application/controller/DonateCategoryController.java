@@ -35,11 +35,11 @@ public class DonateCategoryController
 			RespRestResponse<Object> response
 							= new RespRestResponse<Object>();
 			response.setRespData(catgories);
-			response.setErrMsg("Get all categories successfully.");
+			response.setMessage("Get all categories successfully.");
 	        return new ResponseEntity<>(response, HttpStatus.OK);			
 		} catch(Exception e) {
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
-			response.setErrMsg(e.getMessage());
+			response.setMessage(e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }
@@ -53,28 +53,28 @@ public class DonateCategoryController
 			RespRestResponse<Object> response
 							= new RespRestResponse<Object>();
 			response.setRespData(DonateCategoryResponseMapper.INSTANCE.convert(result));
-			response.setErrMsg("Add new category successfully.");
+			response.setMessage("Add new category successfully.");
 	        return new ResponseEntity<>(response, HttpStatus.OK);			
 		} catch(Exception e) {
 			RespRestResponse<Object> response = new RespRestResponse<Object>();
-			response.setErrMsg(e.getMessage());
+			response.setMessage(e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }
 	
 	
 	@DeleteMapping("DeleteById")
-	public ResponseEntity<RespRestResponse<String>> deletebyId(@RequestBody RqstModifyDonateCategory category)
+	public ResponseEntity<RespRestResponse<String>> deleteById(@RequestBody RqstModifyDonateCategory category)
 	{
 		try {
 			donateCategoryService.deleteById(category.getId());
 			RespRestResponse<String> response
 					= new RespRestResponse<String>();
-			response.setErrMsg("delete category successfully.");
+			response.setMessage("Delete category successfully.");
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		} catch (Exception e) {
 			RespRestResponse<String> response = new RespRestResponse<String>();
-			response.setErrMsg(e.getMessage());
+			response.setMessage(e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }

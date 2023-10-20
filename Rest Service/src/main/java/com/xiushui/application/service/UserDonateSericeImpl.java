@@ -1,6 +1,7 @@
 package com.xiushui.application.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -37,5 +38,11 @@ public class UserDonateSericeImpl implements UserDonateService
 	public List<UserDonate> getByUserId(long id)
 	{
 		return userDonateRepository.findByUserId(id);
+	}
+
+	@Override
+	public Optional<UserDonate> getById(long id)
+	{
+		return userDonateRepository.findById(id);
 	}
 }

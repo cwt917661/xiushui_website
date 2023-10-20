@@ -5,12 +5,9 @@ import { useConirmStore } from '@/stores/GlobalComponentStore';
 
 // const dialog = ref(false);
 
-const { confirmTitle, confirmText, show } = storeToRefs(useConirmStore());
-const store = useConirmStore();
-store.$subscribe((mutation, state) => {
-    console.log(mutation);
-    console.log(state);
-});
+const { confirmTitle, confirmText, show, action, modifiedItem } = storeToRefs(useConirmStore());
+useConirmStore();
+
 
 </script>
 <template>
@@ -37,7 +34,7 @@ store.$subscribe((mutation, state) => {
             <v-btn
               color="0047aa"
               variant="text"
-              @click="show = false"
+              @click="action(modifiedItem)"
             >
               確認
             </v-btn>

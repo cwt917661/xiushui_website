@@ -56,20 +56,22 @@ public class UserDonate
 	private int totalAmount;
 	
 	@Column(nullable = false)
-	private int currentPaid;
+	private int unpaid;
 	
 	@Column(nullable = false)
 	private Date dueDt;
 	
 	@Column(nullable = false)
-	private int sponsor;
+	private long sponsor;
 	
 	private String remark;
 	
 	@CreationTimestamp
+	@Column(nullable = false, updatable = false, columnDefinition="timestamp default current_timestamp")
 	private Timestamp createDt;
 	
 	@UpdateTimestamp
+	@Column(nullable = false, updatable = false, columnDefinition="timestamp default current_timestamp on update current_timestamp")
 	private Timestamp updateDt;
 	
 }

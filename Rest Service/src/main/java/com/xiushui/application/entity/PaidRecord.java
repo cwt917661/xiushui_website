@@ -34,8 +34,9 @@ public class PaidRecord
 	private int paid;
 	
 	@Column(nullable = false)
-	private int sponsor;
+	private long sponsor;
 	
 	@CreationTimestamp
+	@Column(nullable = false, updatable = false, columnDefinition="timestamp default current_timestamp")
 	private Timestamp createDt;
 }

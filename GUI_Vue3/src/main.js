@@ -14,7 +14,28 @@ import * as directives from 'vuetify/directives';
 import { aliases, mdi } from "vuetify/lib/iconsets/mdi";
 import "@mdi/font/css/materialdesignicons.css";
 
+
+
+const myCustomLightTheme = {
+  dark: false,
+  colors: {
+    primary: '#1387ED',
+    'primary-darken-1': '#1164c7',
+    secondary: '#00A886',
+    'secondary-darken-1': '#008b67',
+    error: '#B00020',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#e27b08',
+  },
+}
 const vuetify = createVuetify({
+  theme: {
+    defaultTheme: 'myCustomLightTheme',
+    themes: {
+      myCustomLightTheme,
+    },
+  },
   icons: {
     defaultSet: "mdi",
     aliases,

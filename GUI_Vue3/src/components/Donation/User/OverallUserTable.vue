@@ -37,10 +37,10 @@
             size="large" 
             @click="addNewDonation(item)"
           >
-            mdi-note-plus
+            mdi-text-box-plus-outline
           </v-icon>
         </template>
-        <span>新增</span>
+        <span>新增點燈紀錄</span>
       </v-tooltip>
       <v-tooltip location="bottom">
         <template v-slot:activator="{ props }">
@@ -49,11 +49,24 @@
             color="#ffb44c" 
             v-bind="props"
             size="large" 
-            @click="editDonation(item)">
-            mdi-clipboard-edit
+            @click="$emit('editUserInfo', item)">
+            mdi-account-edit
           </v-icon>
         </template>
         <span>修改</span>
+      </v-tooltip>
+      <v-tooltip location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-icon 
+            class="mr-3"
+            color="#E53935" 
+            v-bind="props"
+            size="large" 
+            @click="onDelete(item)">
+            mdi-delete-forever
+          </v-icon>
+        </template>
+        <span>刪除</span>
       </v-tooltip>
       <v-tooltip location="bottom">
         <template v-slot:activator="{ props }">

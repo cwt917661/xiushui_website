@@ -37,24 +37,24 @@
       <v-window-item>
         <!-- 待處理列表 -->
         <v-card class="mx-auto">
-          <OverallCategory ref="overallCategory" @dataLoading="dataLoading" @tableDataReady="setTable" />
-          <OverallDonationTable ref="overallTable" />
+          <OverallCategory ref="overallCategory" @dataLoading="tableLoading" @tableDataReady="setTable" />
+          <OverallDonationTable ref="overallTable" @dataRefresh="tableRefresh" @editUserInfo="editUserInfo" />
         </v-card>
       </v-window-item>
       <v-window-item>
         <!-- 個人點燈紀錄 -->
         <v-card flat>
-          <OverallUserTable ref="overallUserTable" />
+          <OverallUserTable ref="overallUserTable" @editUserInfo="editUserInfo" />
         </v-card>
       </v-window-item>
       <v-window-item>
         <!-- 點燈記錄查詢 -->
-        <v-card class="mx-auto">
-        </v-card>
+        <OverallSearchTable ref="overallSearchTable" />
       </v-window-item>
     </v-window>
   </v-card>
-  <AddCategoryDialog ref="addCategoryDialog" />
+  <CategorySettingDialog ref="categorySettingDialog" />
+  <ModifyUserInfoDialog ref="modifyUserInfoDialog" @dialogClosed="refresh"/>
 </template>
 <script src="./DonationView.js"></script>
   

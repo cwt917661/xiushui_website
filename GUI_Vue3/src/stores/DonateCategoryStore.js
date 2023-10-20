@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { apiGetDataService, apiPostDataService, apiDeleteDataService } from '@/services/api.js';
+import { apiGetDataService, apiPostDataService, apiDeleteDataService } from '@/utilities/callService.js';
 
 export const useDonateCategoryStore = defineStore('donateCategoryStore', () => {
 
@@ -21,11 +21,11 @@ export const useDonateCategoryStore = defineStore('donateCategoryStore', () => {
                 });
         } catch (err) {
             success.value = false;
-            error.value = err.errMsg;
+            error.value = err.message;
         }
     }
 
-    async function AddNewCategory(sendData) {
+    async function addNewCategory(sendData) {
         error.value = null;
         category.value = null;
         var url = import.meta.env.VITE_REST_URL_DONATECATEGORY_ADD_NEW;
@@ -37,11 +37,11 @@ export const useDonateCategoryStore = defineStore('donateCategoryStore', () => {
                 });
         } catch (err) {
             success.value = false;
-            error.value = err.errMsg;
+            error.value = err.message;
         }
     }
 
-    async function DeleteCategory(sendData) {
+    async function deleteCategory(sendData) {
         error.value = null;
         var url = import.meta.env.VITE_REST_URL_DONATECATEGORY_DELETE;
         try {
@@ -49,9 +49,9 @@ export const useDonateCategoryStore = defineStore('donateCategoryStore', () => {
                 .then(() => true)
         } catch (err) {
             success.value = false;
-            error.value = err.errMsg;
+            error.value = err.message;
         }
     }
 
-    return { catgList, category, success, error, fetchAll, AddNewCategory, DeleteCategory };
+    return { catgList, category, success, error, fetchAll, addNewCategory, deleteCategory };
 });

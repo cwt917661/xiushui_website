@@ -10,16 +10,16 @@
         class="elevation-1"
         hover
     >
-    <template v-slot:item.payment="{ item }">
+    <template v-slot:item.unpaid="{ item }">
       <v-chip
-        :color="getColor(item.payment)"
+        :color="getColor(item.unpaid)"
         dark
       >
-        {{ item.payment }}
+        {{ item.unpaid }}
       </v-chip>
     </template>
     <template  v-slot:top>
-      <UserContactDialog ref="contactInfo" />
+      <UserContactDialog ref="contactInfo" @editUserInfo="editUserInfo"/>
       <UserPaymentDialog ref="paymentInfo" @dialogClosed="paymentClosed"/>
     </template>
     <template v-slot:item.actions="{ item }">

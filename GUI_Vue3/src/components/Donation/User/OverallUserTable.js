@@ -1,11 +1,10 @@
 import { VDataTable } from 'vuetify/labs/VDataTable';
-import { reactive } from 'vue';
+import { ref, reactive } from 'vue';
 import SingleUserDonationTable from './SingleUserDonationTable.vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/UserStore';
 import { useUserDonateStore } from '@/stores/UserDonateStore';
-import { useSnackBarStore } from '@/stores/GlobalComponentStore';
-
+import { useSnackBarStore, useConirmStore, useLoadingStore } from '@/stores/GlobalComponentStore';
 
 const constVals = reactive({
   tableHeight: window.innerHeight * 0.4,
@@ -34,23 +33,23 @@ const reactVals = reactive({
 });
 
 const open = () => {
-   // initiallize table data
-   reactVals.loading = 'primary';
-   const { userList, success, error } = storeToRefs(useUserStore());
-   const { fetchAll } = useUserStore();
-   fetchAll().then(() => {
-     if (success.value) {
-       reactVals.tableData = userList;
-       reactVals.loading = false;
-       const snackBarStore = useSnackBarStore();
-       snackBarStore.showMessage('取得使用者清單成功', 'success');
-     } else {
-       // error handling
-       console.error('Get user list error: ' + error.value);
-       const snackBarStore = useSnackBarStore();
-       snackBarStore.showMessage('[取得使用者清單失敗]<br>[錯誤訊息] ' + error.value, 'error');
-     }
-   });
+  // initiallize table data
+  reactVals.loading = 'primary';
+  const { userList, success, error } = storeToRefs(useUserStore());
+  const { fetchAll } = useUserStore();
+  fetchAll().then(() => {
+    if (success.value) {
+      reactVals.tableData = userList;
+      reactVals.loading = false;
+      const snackBarStore = useSnackBarStore();
+      snackBarStore.showMessage('取得使用者清單成功', 'success');
+    } else {
+      // error handling
+      console.error('Get user list error: ' + error.value);
+      const snackBarStore = useSnackBarStore();
+      snackBarStore.showMessage('[取得使用者清單失敗]<br>[錯誤訊息] ' + error.value, 'error');
+    }
+  });
 };
 
 const onExpand = (item) => {
@@ -66,20 +65,23 @@ const onExpand = (item) => {
 
   // start expand
   if (reactVals.expanded.length == 1) {
+    const loadingStore = useLoadingStore();
+    loadingStore.showLoading();
+  
     var sendData = { id: item.id };
 
     const { donationList, success, error } = storeToRefs(useUserDonateStore());
     const { fetchByUserId } = useUserDonateStore();
     fetchByUserId(sendData).then(() => {
       if (success.value) {
-        reactVals.userDonationData = donationList.value.map((obj) => Object.assign({}, obj, {
-          payment: obj.totalAmount - obj.currentPaid
-        }));
+        reactVals.userDonationData = donationList.value;
+        loadingStore.closeLoading();
       } else {
         // error handling
         console.error('Get donation data by user id: ' + error.value);
         const snackBarStore = useSnackBarStore();
         snackBarStore.showMessage('[取得記錄失敗]<br>[錯誤訊息] ' + error.value, 'error');
+        loadingStore.closeLoading();
       }
     });
   }
@@ -87,20 +89,50 @@ const onExpand = (item) => {
 
 const addNewDonation = (item) => {
   console.log('add new donation for' + item.name);
+  const snackBarStore = useSnackBarStore();
+  snackBarStore.showMessage('這個功能還沒做好喔..', 'warning');
 };
 
-const editDonation = (item) => {
-  console.log('edit donation for' + item.name);
-};
+const onDelete = (item) => {
+  const confirmStore = useConirmStore();
+  confirmStore.showConfirm('刪除使用者', '確定要刪除 [ ' + item.name + ' ] ？', item, (item) => {
+    confirmStore.close();
+    const loadingStore = useLoadingStore();
+    loadingStore.showLoading();
+
+    var sendData = { data: { id: item.id } };
+    const { success, error } = storeToRefs(useUserStore());
+    const { deleteUserService } = useUserStore();
+    deleteUserService(sendData).then(() => {
+      // console.log(error.value);
+      if (success.value) {
+        const snackBarStore = useSnackBarStore();
+        snackBarStore.showMessage('刪除使用者成功!!', 'success');
+        loadingStore.closeLoading();
+        open();
+      } else {
+        // error handling
+        console.error('Delete paid record error: ' + error.value);
+        const snackBarStore = useSnackBarStore();
+        snackBarStore.showMessage('[刪除使用者失敗]<br>[錯誤訊息] ' + error.value, 'error');
+        loadingStore.closeLoading();
+      }
+    });
+
+  });
+}
 
 export default {
   components: {
     VDataTable,
-    SingleUserDonationTable
+    SingleUserDonationTable,
   },
+  emits:[
+    'editUserInfo'
+  ],
   setup() {
     open();
-    return { constVals, reactVals, onExpand, addNewDonation, editDonation, open };
+    return { constVals, reactVals, onExpand, addNewDonation, open, onDelete };
   },
 
 }

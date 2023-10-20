@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserDonateStore } from '@/stores/UserDonateStore';
 import { useSnackBarStore } from '@/stores/GlobalComponentStore';
@@ -5,26 +6,27 @@ import { useSnackBarStore } from '@/stores/GlobalComponentStore';
 const chiplist = [
   { color: 'error', icon: 'mdi-alert-decagram', text: '未繳費' },
   { color: 'warning', icon: 'mdi-calendar-alert', text: '即將到期' },
-  { color: 'primary', icon: 'mdi-all-inclusive', text: '所有資料' },
+  { color: 'info', icon: 'mdi-all-inclusive', text: '所有資料' },
 ];
 
+var selection = ref(0);
+
 export default {
-  
   setup(props, { emit}) {
-    const changeType = (index) => {
+    const selectChange = () => {
       emit('dataLoading');
-      // console.log(chiplist[index].text);
-      var url = import.meta.env.VITE_REST_URL_USERDONATE_GET_ALLINFO;
-      if (index == 0) url = import.meta.env.VITE_REST_URL_USERDONATE_GET_OVERDRAFT;
-      else if (index == 1) url = import.meta.env.VITE_REST_URL_USERDONATE_GET_ONCOMING;
-    
-      callService(url);
+      refresh();
     };
     
-    const callService = (url) => {
+    const refresh = () => {
+      let index = selection.value;
+      let serviceURL = import.meta.env.VITE_REST_URL_USERDONATE_GET_ALLINFO;
+      if (index == 0) serviceURL = import.meta.env.VITE_REST_URL_USERDONATE_GET_OVERDRAFT;
+      else if (index == 1) serviceURL = import.meta.env.VITE_REST_URL_USERDONATE_GET_ONCOMING;
+
       const { donationList, success, error } = storeToRefs(useUserDonateStore());
       const { fetchOverallData } = useUserDonateStore();
-      fetchOverallData(url).then(() => {
+      fetchOverallData(serviceURL).then(() => {
         if (success.value) {
           emit('tableDataReady', donationList.value);
           const snackBarStore = useSnackBarStore();
@@ -38,6 +40,6 @@ export default {
       });
     }
 
-    return { chiplist, changeType };
+    return { chiplist, selection, refresh, selectChange };
   }
 }

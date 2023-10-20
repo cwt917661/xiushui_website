@@ -1,12 +1,14 @@
 package com.xiushui.application.service;
 
-import java.util.List;
-
 import com.xiushui.application.entity.PaidRecord;
+import com.xiushui.application.response.RespGetPaidRecordsWithDonateInfo;
+import com.xiushui.application.response.RespRemainingPayment;
 
 public interface PaidRecordService
 {
-	List<PaidRecord> getAllRecords(long userDonationId);
+	RespGetPaidRecordsWithDonateInfo getRecordsByDonateId(long userDonationId) throws Exception;
 		
-	PaidRecord addNewRecord(PaidRecord record) throws Exception;
+	RespRemainingPayment addNewRecord(PaidRecord record) throws Exception;
+	
+	int deleteById(long id) throws Exception;
 }

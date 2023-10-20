@@ -12,4 +12,12 @@ public interface UserService
 	List<User> getUserByName(String name);
 	
 	Optional<User> getUserById(long id);
+	
+	User addNewUser(User user) throws Exception;
+	
+	User editUser(User user) throws Exception;
+	
+	void deleteById(long id) throws Exception;
+	
+	List<String> getDistinctTypes();
 }

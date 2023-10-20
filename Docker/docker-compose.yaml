@@ -7,6 +7,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWD}
       MYSQL_DATABASE: ${DB_SCHEMA_NAME}
+      TZ: Asia/Taipei
     ports:
       # 使用宿主机的3306端口映射到容器的3306端口
       # 宿主机：容器
@@ -14,6 +15,7 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql
       - ./init_sql:/docker-entrypoint-initdb.d
+
 
   #MySql Web UI
   php-my-admin:

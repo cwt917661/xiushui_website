@@ -10,7 +10,7 @@ import com.xiushui.application.entity.UserDonate;
 public interface UserDonateRepository extends JpaRepository<UserDonate, Long>
 {
 	@Query(value = "SELECT * FROM user_donate "
-			+ "WHERE current_paid < total_amount"
+			+ "WHERE unpaid > 0"
 			+ " ORDER BY due_dt", nativeQuery = true)
 	List<UserDonate> findOverDraft();
 	
@@ -27,5 +27,5 @@ public interface UserDonateRepository extends JpaRepository<UserDonate, Long>
 	
 	@Query(value = "SELECT * FROM user_donate WHERE category_id = :id"
 			+ " ORDER BY year desc", nativeQuery = true)
-	List<UserDonate> findByCategoryId(long id);
+	List<UserDonate> findByCategoryId(long id);	
 }

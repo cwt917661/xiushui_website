@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { apiGetDataService, apiPostDataService, apiDeleteDataService } from '@/services/api.js';
+import { apiGetDataService, apiPostDataService, apiDeleteDataService } from '@/utilities/callService.js';
 
 export const useUserDonateStore = defineStore('userDonateStore', () => {
     const donationList = ref([]);
@@ -19,7 +19,7 @@ export const useUserDonateStore = defineStore('userDonateStore', () => {
                 });
         } catch (err) {
             success.value = false;
-            error.value = err.errMsg;
+            error.value = err.message;
         }
     }
 
@@ -35,7 +35,7 @@ export const useUserDonateStore = defineStore('userDonateStore', () => {
                 });
         } catch (err) {
             success.value = false;
-            error.value = err.errMsg;
+            error.value = err.message;
         }
     }
 

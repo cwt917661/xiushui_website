@@ -19,17 +19,32 @@ export const useSnackBarStore = defineStore('snackBarStore', () => {
 
 });
 
+export const useLoadingStore = defineStore('loadingStore', () => {
+    const show = ref(false);
+    const showLoading = () => show.value = true;
+    const closeLoading = () => show.value = false;
+
+    return {show, showLoading, closeLoading};
+});
+
 export const useConirmStore = defineStore('confirmStore', () => {
-        const confirmTitle = ref('');
-        const confirmText = ref('');
-        const show = ref(false);
-        const confirm = ref(false);
+    const confirmTitle = ref('');
+    const confirmText = ref('');
+    const show = ref(false);
+    const action = ref(null);
+    const modifiedItem = ref(null);
 
-        function showConfirm(title, text) {
-            confirmTitle.value = title;
-            confirmText.value = text;
-            show.value = true;
-        }
+    function showConfirm(title, text, item, callback) {
+        confirmTitle.value = title;
+        confirmText.value = text;
+        show.value = true;
+        modifiedItem.value = item;
+        action.value = callback;
+    }
 
-        return { confirmTitle, confirmText, show, confirm, showConfirm };
-    });
+    function close() {
+        show.value = false;
+    }
+
+    return { confirmTitle, confirmText, show, action, modifiedItem, showConfirm, close };
+});

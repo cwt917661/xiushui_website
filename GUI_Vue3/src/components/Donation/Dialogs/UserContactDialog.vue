@@ -7,11 +7,17 @@ const openDialog = (data) => {
     item.value = data;
 };
 
+const emit = defineEmits(['editUserInfo'])
+const editUserInfo = () => {
+    emit('editUserInfo', item.value);
+    dialog.value = false;
+}
+
 defineExpose({ openDialog });
 </script>
 
 <template>
-    <v-dialog max-width="500" v-model="dialog">
+    <v-dialog v-model="dialog">
         <v-card class="mx-auto">
             <v-toolbar color="grey-lighten-3" dark>
                 <v-toolbar-title>
@@ -19,6 +25,7 @@ defineExpose({ openDialog });
                     聯絡資訊
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
+                <v-btn variant="text" icon="mdi-account-edit" color="#ee6802" @click="editUserInfo" />
                 <v-btn variant="text" icon="mdi-window-close" @click="dialog=false;" />
             </v-toolbar>
             <v-card-text>
@@ -37,6 +44,14 @@ defineExpose({ openDialog });
                             屆別
                         </template>
                         <v-list-item-title v-text="item.type"></v-list-item-title>
+                    </v-list-item>
+                    <v-divider></v-divider>
+                    <v-list-item>
+                        <template v-slot:prepend>
+                            <v-icon icon="mdi-cake" color="#0266c9" class="mr-2"></v-icon>
+                            生日
+                        </template>
+                        <v-list-item-title v-text="item.birthday"></v-list-item-title>
                     </v-list-item>
                     <v-divider></v-divider>
                     <v-list-item>

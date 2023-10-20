@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 public class RespRestResponse<T>
 {
 	T respData;
-	String errMsg;
+	String message;
 	
 }
